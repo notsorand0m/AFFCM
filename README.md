@@ -1,5 +1,3 @@
-A# AFFCM
-
 **AFFCM** (AI Full File Control Manager) is a Java-based desktop application that allows users to leverage custom AI models to organize, sort, and manage files intelligently. Built with **LLaMA.cpp**, AFFCM enables personalized AI models chosen by the user, providing powerful recommendations and automation for file management.
 
 ---
