@@ -1,14 +1,14 @@
 {
   "log": "",
   "AIModel": "Mistral-Nemo-Instruct-2407-Q4_K_S.gguf",
-  "theme": "Dark",
-  "org_level": "Passive",
-  "archive_interval": "30 min",
+  "theme": "",
+  "org_level": "",
+  "archive_interval": "",
   "multithreading": "",
   "autoSleepControl": "",
   "thermalOptimization": "",
   "fileView": "",
   "automaticBackup": "",
-  "fileVault": "On",
+  "fileVault": "",
   "tempFolder": ""
 }
