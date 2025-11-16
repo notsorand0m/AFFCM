@@ -1,0 +1,47 @@
+# IntelliJ IDEA project files
+.idea/
+*.iml
+out/
+
+# Build output directories
+target/
+build/
+bin/
+classes/
+
+# Java class files
+*.class
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temp files
+*.tmp
+
+# Media / large files
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# ML model files
+*.gguf
+*.onnx
+*.pt
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Gradle
+.gradle/
+gradlew
+gradlew.bat
+
+# Cache
+**/cache/
