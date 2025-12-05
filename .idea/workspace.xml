@@ -9,7 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b532f64f-b022-4d94-9518-01d5a68e8f24" name="Changes" comment="Init" />
+    <list default="true" id="b532f64f-b022-4d94-9518-01d5a68e8f24" name="Changes" comment="Init">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/AFFCM-1.0.dmg" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -100,28 +106,28 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/simeon/IdeaProjects/AFFCM/src/fxml&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/simeon/IdeaProjects/AFFCM&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;/Users/simeon/IdeaProjects/AFFCM/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.28045976&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/dmg" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/fxml" />
       <recent name="$PROJECT_DIR$/src/com/affcm/service" />
       <recent name="$PROJECT_DIR$/icon.iconset" />
-      <recent name="$PROJECT_DIR$/libs" />
-      <recent name="$PROJECT_DIR$/proj/src/com/affcm" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/libs" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/icon.iconset" />
       <recent name="$PROJECT_DIR$/out/com/affcm" />
       <recent name="$PROJECT_DIR$/out" />
-      <recent name="$PROJECT_DIR$/proj" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="main.java.com.affcm" />
@@ -337,7 +343,6 @@
   <component name="VcsManagerConfiguration">
     <ignored-roots>
       <path value="$PROJECT_DIR$/djl/djl" />
-      <path value="$PROJECT_DIR$" />
     </ignored-roots>
     <MESSAGE value="[api] Refactor csvTranslator (#3805)" />
     <MESSAGE value="init commit" />
