@@ -17,14 +17,14 @@ public class JSONControl {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("out/com/affcm//fxml/data.json"))){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("data.json"))){
             gson.toJson(data, writer);
         }
         catch(Exception e){
             System.out.println("Error: " + e);
         }
 
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("out/com/affcm/fxml/logs.json"))){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("logs.json"))){
             gson.toJson(data.log, writer);
         }
         catch(Exception e){

@@ -1,4 +1,0 @@
-rootProject.name='android'
-include ':core'
-include ':pytorch-native'
-include ':tokenizer-native'

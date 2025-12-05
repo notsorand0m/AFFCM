@@ -231,7 +231,7 @@ public class MainController{
         UserService.setData1log("Changed organization level to passive | " + LocalDateTime.now());
         JSONControl.json_saver(UserService.getData1());
 
-        Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
+        Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/out/com/affcm/fxml/Main.fxml")));
         rootPane.getChildren().setAll(fxmlLoader);
     }
 
@@ -240,7 +240,7 @@ public class MainController{
         UserService.setData1log("Changed organization level to autonomous | " + LocalDateTime.now());
         JSONControl.json_saver(UserService.getData1());
 
-        Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
+        Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("out/com/affcm/fxml/Main.fxml")));
         rootPane.getChildren().setAll(fxmlLoader);
     }
 
