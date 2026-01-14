@@ -9,53 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b532f64f-b022-4d94-9518-01d5a68e8f24" name="Changes" comment="Fixes/Deletes">
-      <change afterPath="$PROJECT_DIR$/src/logs.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AFFCM.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AFFCM.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AFFCM.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/logs/data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/AFFCM.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/Data.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$2$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$4$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/SettingsController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/AI_Organize.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/Archive.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/ButtonInit.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseFolderToSort.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseModel.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/CloudSync.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/History.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/LoadingScreen.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/Main.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/OrganizationLevelNotSet.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/PerformanceMode.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/Plugin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/Settings.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/Uploaded.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/styleBTN.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/styleSettings.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/service/DatabaseService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/service/JSONControl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/service/ModelService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/com/affcm/service/UserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/affcm/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/affcm/Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/affcm/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/affcm/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/affcm/service/JSONControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/affcm/service/JSONControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/affcm/service/ModelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/affcm/service/ModelService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/affcm/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/affcm/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fxml/Uploaded.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Uploaded.fxml" afterDir="false" />
+    <list default="true" id="b532f64f-b022-4d94-9518-01d5a68e8f24" name="Changes" comment="Big update&#10;Including:&#10;Working themes for selected pages&#10;Working when converted to .app&#10;Working .json management">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_01_26,_22_04_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_01_26__22_04__Changes_.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -399,7 +355,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764955516142</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Big update&#10;Including:&#10;Working themes for selected pages&#10;Working when converted to .app&#10;Working .json management">
+      <option name="closed" value="true" />
+      <created>1768421217123</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1768421217123</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -426,7 +390,8 @@
     <MESSAGE value="Initial commit with Git LFS" />
     <MESSAGE value="Init" />
     <MESSAGE value="Fixes/Deletes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixes/Deletes" />
+    <MESSAGE value="Big update&#10;Including:&#10;Working themes for selected pages&#10;Working when converted to .app&#10;Working .json management" />
+    <option name="LAST_COMMIT_MESSAGE" value="Big update&#10;Including:&#10;Working themes for selected pages&#10;Working when converted to .app&#10;Working .json management" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
