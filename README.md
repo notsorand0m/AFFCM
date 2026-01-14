@@ -12,6 +12,18 @@
   - slf4j-api-1.7.36
 
 MacOS Support
-[Download .dmg file](https://www.dropbox.com/scl/fi/ybfmvha0rbbbxjp3rtfvi/AFFCM-1.0.dmg?rlkey=ut7fu7hggapx7lmsaq42a3vs6&st=013e00mf&dl=0)
+[Download .dmg file](https://www.dropbox.com/scl/fi/ybfmvha0rbbbxjp3rtfvi/AFFCM-1.0.dmg?rlkey=ut7fu7hggapx7lmsaq42a3vs6&st=cpz6x8r2&dl=0)
 
-Windows Support (Soon)
+Windows Support (To be developed)
+
+### Build local .dmg
+jpackage \                            
+  --name AFFCM \                                                
+  --app-version 1.0 \
+  --type dmg \           
+  --input libs \
+  --main-jar AFFCM.jar \
+  --main-class com.affcm.Main \
+  --java-options "-Xmx512m" \
+  --dest dist \
+--icon AFFCM.icns
