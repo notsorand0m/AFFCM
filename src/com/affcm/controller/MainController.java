@@ -1,5 +1,6 @@
 package com.affcm.controller;
 
+import javafx.scene.control.Alert;
 import javafx.scene.text.Text;
 import com.affcm.Data;
 import com.affcm.service.ModelService;
@@ -21,8 +22,8 @@ import javafx.stage.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.*;
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -164,7 +165,7 @@ public class MainController{
     @FXML
     public void initialize() throws Exception{
 
-        try(BufferedReader reader = new BufferedReader(new FileReader("data.json"))){
+        try(BufferedReader reader = new BufferedReader(new FileReader(Paths.get(System.getProperty("user.home"), "AFFCM", "logs.json").toFile()))){
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             Data data = gson.fromJson(reader, Data.class);
 
@@ -385,9 +386,9 @@ public class MainController{
         return directoriesDocuments;
     }
 
-    public List<String> findDirectoriesDownloads() throws Exception{
+    public List<String> findDirectoriesDownloads(File downloads) throws Exception{
 
-        File downloads = new File("/Users/" + OSName + "/Downloads");
+        // File downloads = new File("/Users/" + OSName + "/Downloads");
 
         File[] contentDownloads = downloads.listFiles();
 
@@ -402,13 +403,11 @@ public class MainController{
             }
         };
 
-        if(multithreadingState.equals("On")){
-            while(counter > 0){
-                service.submit(task);
-                counter--;
-            }
-        }
-        else {
+                //service.submit(task);
+                //counter--;
+
+
+
             while (counter > 0) {
                 for (int i = 0; i < contentDownloads.length; i++) {
                     if (contentDownloads[i].isDirectory()) {
@@ -417,7 +416,7 @@ public class MainController{
                     counter--;
                 }
             }
-        }
+
 
         for(int i = 0; i < directoriesDownloads.toArray().length; i++){
             System.out.println(directoriesDownloads.get(i));
@@ -510,22 +509,44 @@ public class MainController{
 
     @FXML
     public void setRecommendedFolderAccepted(ActionEvent event) throws Exception{
-        try{
-            System.out.println(oldDirectory);
-            System.out.println(newDirectory);
+        try {
+            // For debugging
+//            System.out.println(oldDirectory);
+//            System.out.println(newDirectory);
             Files.move(oldDirectory, newDirectory);
         }
         catch (Exception ignored){
 
         }
-        Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
-        rootPane.getChildren().setAll(fxmlLoader);
+        if(UserService.getData1().theme.equals("Light")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/MainLite.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else if(UserService.getData1().theme.equals("Dark")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else{
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
     }
 
     @FXML
     public void setRecommendedFolderDeclined(ActionEvent event) throws Exception{
-        Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
-        rootPane.getChildren().setAll(fxmlLoader);
+        if(UserService.getData1().theme.equals("Light")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/MainLite.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else if(UserService.getData1().theme.equals("Dark")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else{
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+
     }
 
     @FXML
@@ -533,10 +554,14 @@ public class MainController{
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose a file");
-        Stage stage = new Stage();
+        Stage stage = (Stage) rootPane.getScene().getWindow();
         File file = fileChooser.showOpenDialog(stage);
         oldDirectory = Path.of(file.getAbsolutePath());
+
+        // For debugging
         System.out.println(oldDirectory.toString());
+
+        File downloads = Paths.get(System.getProperty("user.home"), "Downloads").toFile();
 
         Task<String> task1 = new Task<>() {
             @Override
@@ -544,22 +569,53 @@ public class MainController{
                 if(file.isFile()) {
 //                    UserService.getData1().tempFolder = file.toPath().toString();
 //                    JSONControl.json_saver(UserService.getData1());
+                    List<String> listDownloads = findDirectoriesDownloads(downloads);
 
-                    folder = ModelService.call(findDirectoriesDownloads(), file);
-                    newDirectory = Path.of(folder, file.getName());
-                    System.out.println(newDirectory);
-                    setFolder = folder;
+                    if(!UserService.getData1().AIModel.isEmpty()){
+                        folder = ModelService.call(listDownloads, file);
+                        newDirectory = Path.of(folder, file.getName());
+
+                        // For debugging
+                        System.out.println(newDirectory);
+
+                        setFolder = folder;
+                    }
+                    else{
+                        if(UserService.getData1().theme.equals("Light")){
+                            OpenChooseModelPage(new ActionEvent());
+                        }
+                        else if(UserService.getData1().theme.equals("Dark")){
+                            OpenChooseModelPage(new ActionEvent());
+                        }
+                        else{
+                            OpenChooseModelPage(new ActionEvent());
+                        }
+                    }
                 }
 
                 return folder;
             }
         };
 
+        task1.setOnFailed(e -> {
+            throw new RuntimeException();
+        });
+
         task1.setOnSucceeded((evnt) -> {
 
+            FXMLLoader loader;
             if(UserService.getData1().org_level.equals("Passive")) {
                 // Loads .fxml file
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/affcm/fxml/Uploaded.fxml"));
+                if(UserService.getData1().theme.equals("Dark")){
+                    loader = new FXMLLoader(getClass().getResource("/com/affcm/fxml/Uploaded.fxml"));
+                }
+                else if(UserService.getData1().theme.equals("Light")){
+                    loader = new FXMLLoader(getClass().getResource("/com/affcm/fxml/UploadedLite.fxml"));
+                }
+                else{
+                    loader = new FXMLLoader(getClass().getResource("/com/affcm/fxml/Uploaded.fxml"));
+                }
+
                 try {
                     Parent window = loader.load();
 
@@ -572,29 +628,22 @@ public class MainController{
 
 
 
-                } catch (Exception ignored) {
-
+                } catch (Exception exception) {
+                    throw new RuntimeException(exception);
                 }
             }
             else if(UserService.getData1().org_level.equals("Autonomous")){
                 try {
                     setRecommendedFolderAccepted(new ActionEvent());
-                } catch (Exception ignored) {
-
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
             }
             else{
                 try {
-                    Parent loader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/OrganizationLevelNotSet.fxml")));
-
-                    // Shows the windows with the new instance of MainController :)
-                    rootPane.getChildren().setAll(loader);
-
-                    // Loads home page
-
-
+                    OpenOrgLevelNotSet(new ActionEvent());
                 } catch (Exception e) {
-                    System.out.println(e);
+                    throw new RuntimeException(e);
                 }
             }
 
@@ -635,7 +684,13 @@ public class MainController{
         for (int i = 0; i < contentDownloads.length; i++) {
             if (contentDownloads[i].isFile()) {
                 oldDirectory = Path.of(contentDownloads[i].getAbsolutePath());
-                folder = ModelService.call(findDirectoriesDownloads(), contentDownloads[i]);
+
+                DirectoryChooser dirChooser = new DirectoryChooser();
+                dirChooser.setTitle("Choose a folder");
+                Stage stage = new Stage();
+                File downloads2 = dirChooser.showDialog(stage);
+
+                folder = ModelService.call(findDirectoriesDownloads(downloads2), contentDownloads[i]);
                 newDirectory = Path.of(folder, contentDownloads[i].getName());
 
                 System.out.println(contentDownloads[i] + " is going to: " + folder);
@@ -668,7 +723,13 @@ public class MainController{
         for (int i = 0; i < contentDownloads.length; i++) {
             if (contentDownloads[i].isFile()) {
                 oldDirectory = Path.of(contentDownloads[i].getAbsolutePath());
-                folder = ModelService.call(findDirectoriesDownloads(), contentDownloads[i]);
+
+                DirectoryChooser dirChooser = new DirectoryChooser();
+                dirChooser.setTitle("Choose a folder");
+                Stage stage = new Stage();
+                File downloads3 = dirChooser.showDialog(stage);
+
+                folder = ModelService.call(findDirectoriesDownloads(downloads3), contentDownloads[i]);
                 newDirectory = Path.of(folder, contentDownloads[i].getName());
 
                 System.out.println(contentDownloads[i] + " is going to: " + folder);
@@ -700,7 +761,13 @@ public class MainController{
         for (int i = 0; i < contentDownloads.length; i++) {
             if (contentDownloads[i].isFile()) {
                 oldDirectory = Path.of(contentDownloads[i].getAbsolutePath());
-                folder = ModelService.call(findDirectoriesDownloads(), contentDownloads[i]);
+
+                DirectoryChooser dirChooser = new DirectoryChooser();
+                dirChooser.setTitle("Choose a folder");
+                Stage stage = new Stage();
+                File downloads4 = dirChooser.showDialog(stage);
+
+                folder = ModelService.call(findDirectoriesDownloads(downloads4), contentDownloads[i]);
                 newDirectory = Path.of(folder, contentDownloads[i].getName());
 
                 System.out.println(contentDownloads[i] + " is going to: " + folder);
@@ -737,7 +804,13 @@ public class MainController{
         for (int i = 0; i < contentDownloads.length; i++) {
             if (contentDownloads[i].isFile()) {
                 oldDirectory = Path.of(contentDownloads[i].getAbsolutePath());
-                folder = ModelService.call(findDirectoriesDownloads(), contentDownloads[i]);
+
+                DirectoryChooser dirChooser = new DirectoryChooser();
+                dirChooser.setTitle("Choose a folder");
+                Stage stage5 = new Stage();
+                File downloads5 = dirChooser.showDialog(stage5);
+
+                folder = ModelService.call(findDirectoriesDownloads(downloads5), contentDownloads[i]);
                 newDirectory = Path.of(folder, contentDownloads[i].getName());
 
                 System.out.println(contentDownloads[i] + " is going to: " + folder);
@@ -1082,9 +1155,51 @@ public class MainController{
 
     @FXML
     public void OpenSettingsPage(ActionEvent event) throws Exception{
-        Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Settings.fxml")));
-        rootPane.getChildren().setAll(fxmlLoader);
+        if(UserService.getData1().theme.equals("Light")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/SettingsLite.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else if(UserService.getData1().theme.equals("Dark")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Settings.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else{
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Settings.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
 
+    }
+
+    @FXML
+    public void OpenOrgLevelNotSet(ActionEvent event) throws Exception{
+        if(UserService.getData1().theme.equals("Light")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/OrganizationLevelNotSetLite.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else if(UserService.getData1().theme.equals("Dark")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/OrganizationLevelNotSet.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else{
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/OrganizationLevelNotSet.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+    }
+
+    @FXML
+    public void OpenChooseModelPage(ActionEvent event) throws Exception{
+        if(UserService.getData1().theme.equals("Light")) {
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseModelLite.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else if(UserService.getData1().theme.equals("Dark")) {
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseModel.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else {
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseModel.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
     }
 
     @FXML
@@ -1095,8 +1210,19 @@ public class MainController{
 
     @FXML
     public void OpenHomePage(ActionEvent event) throws Exception{
-        Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
-        rootPane.getChildren().setAll(fxmlLoader);
+        if(UserService.getData1().theme.equals("Light")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/MainLite.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else if(UserService.getData1().theme.equals("Dark")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else{
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+
     }
 
     @FXML
@@ -1136,8 +1262,19 @@ public class MainController{
 
     @FXML
     public void OpenUploaded() throws Exception{
-        Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Uploaded.fxml")));
-        rootPane.getChildren().setAll(fxmlLoader);
+        if(UserService.getData1().theme.equals("Light")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/UploadedLite.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else if(UserService.getData1().theme.equals("Dark")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Uploaded.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else{
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Uploaded.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+
     }
 
 }

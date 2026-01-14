@@ -1,0 +1,25 @@
+Index: src/logs/data.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/logs/data.json b/src/logs/data.json
+new file mode 100644
+--- /dev/null	(date 1767021904534)
++++ b/src/logs/data.json	(date 1767021904534)
+@@ -0,0 +1,14 @@
++{
++  "log": "\nChanged organization level to passive | 2025-12-05T20:04:19.168959\nChanged AI Model | 2025-12-05T20:04:28.094301\nChanged AI Model | 2025-12-29T17:25:04.531129",
++  "AIModel": "Mistral-Nemo-Instruct-2407-Q4_K_S.gguf",
++  "theme": "",
++  "org_level": "Passive",
++  "archive_interval": "",
++  "multithreading": "",
++  "autoSleepControl": "",
++  "thermalOptimization": "",
++  "fileView": "",
++  "automaticBackup": "",
++  "fileVault": "",
++  "tempFolder": "/Users/simeon/Downloads/Mistral-Nemo-Instruct-2407-Q4_K_S.gguf"
++}
+\ No newline at end of file

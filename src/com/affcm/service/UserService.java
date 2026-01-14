@@ -5,17 +5,49 @@ import com.google.gson.GsonBuilder;
 import com.affcm.Data;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class UserService {
 
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     static BufferedReader reader;
+    static final Path dataPath = Paths.get(System.getProperty("user.home"), "AFFCM", "data.json");
+    static final Path logsPath = Paths.get(System.getProperty("user.home"), "AFFCM", "logs.json");
 
     static {
         try {
-            reader = new BufferedReader(new FileReader("data.json"));
-        } catch (FileNotFoundException e) {
+
+            // Ensure folders exists
+            if (!Files.exists(dataPath.getParent())) {
+                Files.createDirectories(dataPath.getParent());
+            }
+            if (!Files.exists(logsPath.getParent())) {
+                Files.createDirectories(dataPath.getParent());
+            }
+
+            // If file does not exist, create default JSON's
+            if (!Files.exists(dataPath)) {
+                try (BufferedWriter writer = Files.newBufferedWriter(dataPath, StandardCharsets.UTF_8)) {
+                    gson.toJson(new Data(), writer);
+                }
+            }
+            if (!Files.exists(logsPath)) {
+                try (BufferedWriter writer = Files.newBufferedWriter(dataPath, StandardCharsets.UTF_8)) {
+                    gson.toJson(new Data(), writer);
+                }
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            reader = new BufferedReader(new FileReader(Paths.get(System.getProperty("user.home"), "AFFCM", "data.json").toFile()));
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

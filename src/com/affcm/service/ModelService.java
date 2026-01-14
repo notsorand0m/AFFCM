@@ -21,7 +21,7 @@ public class ModelService {
                     "Choose the one best of all directory path for this file "
                             + "from these: " + Arrays.toString(Arrays.stream(directories.toArray()).toArray())
                             + "Where should this file go: " + file.getName()
-                            + "Output ONLY the absolute path. Don't include the file name. Include ONLY the path to the folder. Don't include non existing paths from the listed. CHOOSE ONLY FROM THE GIVEN PATHS, DONT OUTPUT ANYTHING ELSE, nothing before, nothing after "
+                            + "You must respond with exactly one value. Output ONLY a single absolute folder path. DO NOT include a file name. DO NOT include quotes, code blocks, explanations, formatting, whitespace, newlines, prefixes, or suffixes. DO NOT include commentary before or after the output. DO NOT invent, modify, or normalize paths. DO NOT output any path that is not explicitly listed. Choose ONE AND ONLY ONE path from the provided list. The output MUST match the chosen path exactly, character-for-character. If no valid path applies, output nothing at all (empty response). Any output other than a single valid listed absolute folder path is strictly forbidden."
             )
                     .setTemperature(0.1f)
                     .setNPredict(30);

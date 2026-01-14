@@ -9,6 +9,7 @@ import com.affcm.controller.MainController;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class JSONControl {
 
@@ -17,14 +18,14 @@ public class JSONControl {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("data.json"))){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(System.getProperty("user.home"), "AFFCM", "data.json").toFile()))){
             gson.toJson(data, writer);
         }
         catch(Exception e){
             System.out.println("Error: " + e);
         }
 
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("logs.json"))){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(System.getProperty("user.home"), "AFFCM", "logs.json").toFile()))){
             gson.toJson(data.log, writer);
         }
         catch(Exception e){

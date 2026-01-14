@@ -32,4 +32,18 @@ public class Data{
         this.tempFolder = temoFolder;
     }
 
+    public Data() {
+        this.log = "";
+        this.theme = "";
+        this.AIModel = "";
+        this.org_level = "";
+        this.archive_interval = "";
+        this.multithreading = "";
+        this.autoSleepControl = "";
+        this.thermalOptimization = "";
+        this.fileView = "";
+        this.automaticBackup = "";
+        this.fileVault = "";
+        this.tempFolder = "";
+    }
 }

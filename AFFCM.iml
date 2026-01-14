@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/models" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/fxml" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/logs" type="java-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -87,5 +88,6 @@
     <orderEntry type="library" name="javafx.fxml" level="project" />
     <orderEntry type="library" name="javafx.graphics" level="project" />
     <orderEntry type="library" name="llama-4.1.0" level="project" />
+    <orderEntry type="library" name="javafx.base" level="project" />
   </component>
 </module>
