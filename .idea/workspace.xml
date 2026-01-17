@@ -10,8 +10,71 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b532f64f-b022-4d94-9518-01d5a68e8f24" name="Changes" comment="Big update&#10;Including:&#10;Working themes for selected pages&#10;Working when converted to .app&#10;Working .json management">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_01_26,_22_04_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_01_26__22_04__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AFFCM.jar" beforeDir="false" afterPath="$PROJECT_DIR$/AFFCM.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/AFFCM.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/Data.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/controller/MainController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/controller/MainController$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/controller/MainController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/controller/MainController$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$4$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/controller/MainController$4$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/controller/MainController$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/controller/MainController$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/controller/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/AI_Organize.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/AI_Organize.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/AI_OrganizeLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/AI_OrganizeLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/Archive.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/Archive.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/ArchiveLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/ArchiveLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseFolderToSort.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseFolderToSort.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseFolderToSortLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseFolderToSortLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseModel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseModel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseModelLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseModelLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/CloudSync.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/CloudSync.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/CloudSyncLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/CloudSyncLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/History.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/History.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/HistoryLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/HistoryLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/MainLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/MainLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/OrganizationLevelNotSet.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/OrganizationLevelNotSet.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/OrganizationLevelNotSetLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/OrganizationLevelNotSetLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/PerformanceMode.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/PerformanceMode.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/PerformanceModeLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/PerformanceModeLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/Plugin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/Plugin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/PluginLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/PluginLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/Settings.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/SettingsLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/SettingsLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/Uploaded.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/Uploaded.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/UploadedLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/UploadedLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/affcm/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/affcm/Data.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/affcm/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/affcm/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/affcm/service/ModelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/affcm/service/ModelService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/affcm/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/affcm/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/AI_Organize.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/AI_Organize.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/AI_OrganizeLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/AI_OrganizeLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Archive.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Archive.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/ArchiveLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/ArchiveLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/ChooseFolderToSort.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/ChooseFolderToSort.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/ChooseFolderToSortLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/ChooseFolderToSortLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/ChooseModel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/ChooseModel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/ChooseModelLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/ChooseModelLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/CloudSync.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/CloudSync.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/CloudSyncLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/CloudSyncLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/History.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/History.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/HistoryLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/HistoryLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/MainLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/MainLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/OrganizationLevelNotSet.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/OrganizationLevelNotSet.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/OrganizationLevelNotSetLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/OrganizationLevelNotSetLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/PerformanceMode.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/PerformanceMode.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/PerformanceModeLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/PerformanceModeLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Plugin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Plugin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/PluginLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/PluginLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Settings.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/SettingsLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/SettingsLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Uploaded.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Uploaded.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/UploadedLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/UploadedLite.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,30 +150,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.GPTClientCLI.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Build AFFCM.executor&quot;: &quot;Run&quot;,
-    &quot;JAR Application.AFFCM.jar.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.converter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.exc_model.executor&quot;: &quot;Run&quot;,
-    &quot;Python.smth.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/simeon/IdeaProjects/AFFCM/libs&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/simeon/IdeaProjects/AFFCM/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.28045976&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.GPTClientCLI.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Gradle.Build AFFCM.executor": "Run",
+    "JAR Application.AFFCM.jar.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.converter.executor": "Run",
+    "Python.exc_model.executor": "Run",
+    "Python.smth.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/simeon/IdeaProjects/AFFCM/libs",
+    "onboarding.tips.debug.path": "/Users/simeon/IdeaProjects/AFFCM/src/Main.java",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.28045976",
+    "settings.editor.selected.configurable": "advanced.settings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/libs" />
@@ -363,7 +426,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768421217123</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Big update&#10;Including:&#10;Working themes for selected pages&#10;Working when converted to .app&#10;Working .json management">
+      <option name="closed" value="true" />
+      <created>1768421395112</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1768421395112</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -406,22 +477,41 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
-          <line>510</line>
+          <line>497</line>
           <properties class="com.affcm.controller.MainController" method="setRecommendedFolderAccepted">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
+          <line>296</line>
+          <properties class="com.affcm.controller.MainController" method="saveFileViewGallery">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
-          <line>641</line>
+          <line>628</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
-          <line>511</line>
+          <line>498</line>
           <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
+          <line>541</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
+          <line>1437</line>
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

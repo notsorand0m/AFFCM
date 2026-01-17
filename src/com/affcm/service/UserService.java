@@ -87,6 +87,9 @@ public class UserService {
     public static void setThermalOptimization(String status) throws Exception {
         data.thermalOptimization = status;
     }
+    public static void setRawFile(String newRawFile) throws Exception{
+        data.rawFile = newRawFile;
+    }
     public static void setFileView(String fileView){
         data.fileView = fileView;
     }

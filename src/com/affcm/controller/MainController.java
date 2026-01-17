@@ -1,6 +1,7 @@
 package com.affcm.controller;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 import com.affcm.Data;
 import com.affcm.service.ModelService;
@@ -22,8 +23,16 @@ import javafx.stage.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.crypto.*;
+import javax.crypto.spec.GCMParameterSpec;
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.awt.event.MouseAdapter;
 import java.io.*;
 import java.nio.file.Paths;
+import java.security.SecureRandom;
+import java.security.spec.ECField;
+import java.security.spec.KeySpec;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -39,125 +48,103 @@ public class MainController{
     // Chatgpt
     private final String OSName = System.getProperty("user.name");
 
+    private static final int SALT_LENGTH = 16; // bytes
+    private static final int IV_LENGTH = 12; // bytes
+    private static final int ITERATIONS = 100_000;
+    private static final int KEY_LENGTH = 256; // AES-256
+
     @FXML
     public BorderPane rootPane;
-
     @FXML
     public Button text5min;
-
     @FXML
     public Button text30min;
-
     @FXML
     public Button text2hours;
-
     @FXML
     public Button text2days;
-
     @FXML
     public Button lightTheme;
-
     @FXML
     public Button darkTheme;
-
     @FXML
     public Button passiveAI;
-
     @FXML
     public Button assistiveAI;
-
     @FXML
     public Button autonomousAI;
-
     @FXML
     public Button multithreadingOn;
-
     @FXML
     public Button multithreadingOff;
-
     @FXML
     public Button sleepControlOn;
-
     @FXML
     public Button sleepControlOff;
-
     @FXML
     public Button thermalOptimizationOn;
-
     @FXML
     public Button thermalOptimizationOff;
-
     @FXML
     public Button fileViewGrid;
-
     @FXML
     public Button fileViewList;
-
     @FXML
     public Button fileViewGallery;
-
     @FXML
     public Button automaticBackupDaily;
-
     @FXML
     public Button automaticBackupMonthly;
-
     @FXML
     public Button automaticBackupCustom;
-
     @FXML
     public Button fileVaultOn;
-
     @FXML
     public Button fileVaultOff;
-
     @FXML
     public Button upload;
-
     public String folder;
-
     @FXML
     public Button recommended_folder;
-
     @FXML
     public Button fileName;
-
     @FXML
     public Button RecommendedFolderAccepted;
-
     @FXML
     public Button RecommendedFolderDeclined;
-
     @FXML
     public Button RecommendedFolderTryAgain;
-
     public String setFolder = "";
-
     @FXML
     public Button OrganizeDesktopID;
-
     @FXML
     public Button OrganizeDocumentsID;
-
     @FXML
     public Button OrganizeDownloadsID;
-
     @FXML
     public Button OrganizeCustomID;
-
     @FXML
     public Button AIModelButton;
-
     public String AIModelName;
-
     public String multithreadingState;
-
     public ExecutorService service;
-
     public int oldTotal;
-
     @FXML
     public Text historyText;
+    @FXML
+    TextArea passwordToCheck;
+    @FXML
+    TextArea passwordToEncrypt;
+    @FXML
+    Button OpenDecryptedFileLocation;
+
+    File rawFile;
+    File encryptedFile;
+    File finalEncryptedFile;
+    File finalFile;
+
+    // @FXML
+    // TextArea passwordToEncrypt;
 
     public static Path oldDirectory;
     public static Path newDirectory;
@@ -670,6 +657,244 @@ public class MainController{
     public void AIFileSorting(ActionEvent event) throws Exception{
         Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseFolderToSort.fxml")));
         rootPane.getChildren().setAll(fxmlLoader);
+    }
+
+    @FXML
+    public SecretKey extractKey(char[] pass, byte[] salt) throws Exception{
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+        KeySpec spec = new PBEKeySpec(pass, salt, ITERATIONS, KEY_LENGTH);
+        SecretKey key = factory.generateSecret(spec);
+        return new SecretKeySpec(key.getEncoded(), "AES");
+    }
+
+    @FXML
+    public void encrypt(File file, File finalFile, char[] pass) throws Exception{
+        byte[] salt = new byte[SALT_LENGTH];
+        SecureRandom random = new SecureRandom();
+        random.nextBytes(salt);
+
+        // Derive key
+        SecretKey key = extractKey(pass, salt);
+
+        // Generate random IV
+        byte[] iv = new byte[IV_LENGTH];
+        random.nextBytes(iv);
+        GCMParameterSpec spec = new GCMParameterSpec(128, iv);
+
+        Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+        cipher.init(Cipher.ENCRYPT_MODE, key, spec);
+
+        try (FileInputStream fis = new FileInputStream(file);
+             FileOutputStream fos = new FileOutputStream(finalFile)) {
+
+            // Write salt + IV at the beginning
+            fos.write(salt);
+            fos.write(iv);
+
+            // Stream encryption
+            try (CipherOutputStream cos = new CipherOutputStream(fos, cipher)) {
+                byte[] buffer = new byte[16 * 1024 * 1024]; // 16 MB buffer
+                int bytesRead;
+                while ((bytesRead = fis.read(buffer)) != -1) {
+                    cos.write(buffer, 0, bytesRead);
+                }
+            }
+        }
+    }
+
+    @FXML
+    public void decrypt(File file, File finalFile, char[] pass) throws Exception{
+        try (FileInputStream fis = new FileInputStream(file)) {
+
+            // Read salt
+            byte[] salt = new byte[SALT_LENGTH];
+            if (fis.read(salt) != SALT_LENGTH) throw new IllegalStateException("Invalid salt length");
+
+            // Read IV
+            byte[] iv = new byte[IV_LENGTH];
+            if (fis.read(iv) != IV_LENGTH) throw new IllegalStateException("Invalid IV length");
+
+            // Derive key
+            SecretKey key = extractKey(pass, salt);
+            GCMParameterSpec spec = new GCMParameterSpec(128, iv);
+
+            Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+            cipher.init(Cipher.DECRYPT_MODE, key, spec);
+
+            // Stream decryption
+            try (CipherInputStream cis = new CipherInputStream(fis, cipher);
+                 FileOutputStream fos = new FileOutputStream(finalFile)) {
+
+                byte[] buffer = new byte[16 * 1024 * 1024]; // 16 MB buffer
+                int bytesRead;
+                while ((bytesRead = cis.read(buffer)) != -1) {
+                    fos.write(buffer, 0, bytesRead);
+                }
+            }
+        }
+    }
+
+    @FXML
+    public void BrowseFileToEncrypt(ActionEvent event) throws Exception{
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose a file");
+        Stage stage = (Stage) rootPane.getScene().getWindow();
+        File file = fileChooser.showOpenDialog(stage);
+
+
+        if(file.isFile()){
+            // rawFile = file;
+            UserService.setRawFile(file.getAbsolutePath());
+            JSONControl.json_saver(UserService.getData1());
+            System.out.println(file);
+            System.out.println(UserService.getData1().rawFile);
+
+            if(UserService.getData1().theme.equals("Light")){
+                Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/EncryptLite.fxml")));
+                rootPane.getChildren().setAll(fxmlLoader);
+            }
+            else if(UserService.getData1().theme.equals("Dark")){
+                Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Encrypt.fxml")));
+                rootPane.getChildren().setAll(fxmlLoader);
+            }
+            else{
+                Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Encrypt.fxml")));
+                rootPane.getChildren().setAll(fxmlLoader);
+            }
+        }
+
+        // Change so the choose file dialog is a task
+        // nd when finished the aes encrypt enter password opens
+        // then when save as clicked its checked if the text area is not empty
+        // then it saves the encrypted file
+    }
+
+    @FXML
+    public void SaveEncryptedFileAs(ActionEvent event) throws Exception{
+        try{
+            File rawFilePacked = new File(UserService.getData1().rawFile);
+            finalEncryptedFile = new File(rawFilePacked.getParentFile().getAbsolutePath() + "/Encrypted" + rawFilePacked.getName() + ".enc");
+            encrypt(rawFilePacked, finalEncryptedFile, passwordToEncrypt.getText().toCharArray());
+
+            if(UserService.getData1().theme.equals("Light")){
+                Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/FileEncryptedSuccsessfullyLite.fxml")));
+                rootPane.getChildren().setAll(fxmlLoader);
+            }
+            else if(UserService.getData1().theme.equals("Dark")){
+                Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/FileEncryptedSuccsessfully.fxml")));
+                rootPane.getChildren().setAll(fxmlLoader);
+            }
+            else{
+                Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/FileEncryptedSuccsessfully.fxml")));
+                rootPane.getChildren().setAll(fxmlLoader);
+            }
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    public void OpenEncryptedLocation(ActionEvent event) throws Exception{
+        File rawFilePacked = new File(UserService.getData1().rawFile);
+        finalEncryptedFile = new File(rawFilePacked.getParentFile().getAbsolutePath() + rawFilePacked.getName() + ".enc");
+        new ProcessBuilder("open", rawFilePacked.getParentFile().getAbsolutePath()).start();
+    }
+
+    public static String removeAllExtensions(String filename) {
+        String name = Paths.get(filename).getFileName().toString();
+
+        int firstDot = name.indexOf('.');
+        if (firstDot <= 0) {
+            return name; // no dot or hidden file like ".gitignore"
+        }
+
+        return name.substring(0, firstDot);
+    }
+
+    public static String removeLastExtension(String filename) {
+        String name = Paths.get(filename).getFileName().toString();
+
+        int lastDot = name.lastIndexOf('.');
+        if (lastDot <= 0) {
+            return name; // no dot or hidden file like ".gitignore"
+        }
+
+        return name.substring(0, lastDot);
+    }
+
+    @FXML
+    public void BrowseFileToDecrypt(ActionEvent event) throws Exception{
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose a file");
+        Stage stage = (Stage) rootPane.getScene().getWindow();
+        File file = fileChooser.showOpenDialog(stage);
+
+        if(file.isFile()) {
+            // rawFile = file;
+            UserService.setRawFile(file.getAbsolutePath());
+            JSONControl.json_saver(UserService.getData1());
+
+            System.out.println(file);
+            System.out.println(UserService.getData1().rawFile);
+
+            if (UserService.getData1().theme.equals("Light")) {
+                Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/RequirePasswordLite.fxml")));
+                rootPane.getChildren().setAll(fxmlLoader);
+            } else if (UserService.getData1().theme.equals("Dark")) {
+                Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/RequirePassword.fxml")));
+                rootPane.getChildren().setAll(fxmlLoader);
+            } else {
+                Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/RequirePassword.fxml")));
+                rootPane.getChildren().setAll(fxmlLoader);
+            }
+        }
+    }
+
+    @FXML
+    public void checkUserPassword(ActionEvent event) throws Exception{
+        try{
+
+            File rawFilePacked = new File(UserService.getData1().rawFile);
+            finalEncryptedFile = new File(rawFilePacked.getParentFile().getAbsolutePath() + "/decrypted" + removeLastExtension(rawFilePacked.getName()));
+            decrypt(rawFilePacked, finalEncryptedFile, passwordToCheck.getText().toCharArray());
+
+            if(UserService.getData1().theme.equals("Light")){
+                Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/FileDecryptedSuccsessfullyLite.fxml")));
+                rootPane.getChildren().setAll(fxmlLoader);
+            }
+            else if(UserService.getData1().theme.equals("Dark")){
+                Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/FileDecryptedSuccsessfully.fxml")));
+                rootPane.getChildren().setAll(fxmlLoader);
+            }
+            else{
+                Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/FileDecryptedSuccsessfully.fxml ")));
+                rootPane.getChildren().setAll(fxmlLoader);
+            }
+
+        } catch (Exception e){
+            System.out.println(e);
+
+            if(UserService.getData1().theme.equals("Light")){
+                Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/WrongPasswordLite.fxml")));
+                rootPane.getChildren().setAll(fxmlLoader);
+            }
+            else if(UserService.getData1().theme.equals("Dark")){
+                Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/WrongPassword.fxml")));
+                rootPane.getChildren().setAll(fxmlLoader);
+            }
+            else{
+                Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/WrongPassword.fxml")));
+                rootPane.getChildren().setAll(fxmlLoader);
+            }
+
+        }
+    }
+
+    @FXML
+    public void OpenDecryptedLocation(ActionEvent event) throws Exception{
+        File rawFilePacked = new File(UserService.getData1().rawFile);
+        finalEncryptedFile = new File(rawFilePacked.getParentFile().getAbsolutePath() + removeLastExtension(rawFilePacked.getName()));
+        new ProcessBuilder("open", rawFilePacked.getParentFile().getAbsolutePath()).start();
     }
 
     @FXML
@@ -1223,6 +1448,22 @@ public class MainController{
             rootPane.getChildren().setAll(fxmlLoader);
         }
 
+    }
+
+    @FXML
+    public void OpenEncryptDecryptPage(ActionEvent event) throws Exception{
+        if(UserService.getData1().theme.equals("Light")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/EncryptDecryptLite.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else if(UserService.getData1().theme.equals("Dark")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/EncryptDecrypt.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else{
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/EncryptDecrypt.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
     }
 
     @FXML

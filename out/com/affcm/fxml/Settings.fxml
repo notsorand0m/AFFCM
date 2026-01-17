@@ -104,7 +104,7 @@
                         <Blend />
                     </effect>
                 </Rectangle>
-                <Button alignment="TOP_LEFT" layoutX="43.0" layoutY="188.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenCloudSync" prefHeight="25.0" prefWidth="148.0" stylesheets="@style.css" text="Cloud Sync" textFill="#979393">
+                <Button alignment="TOP_LEFT" layoutX="43.0" layoutY="188.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenEncryptDecryptPage" prefHeight="25.0" prefWidth="148.0" stylesheets="@style.css" text="AES Encryption" textFill="#979393">
                     <font>
                         <Font name="Arial" size="13.0" />
                     </font>
@@ -205,22 +205,22 @@
                   <Font name="Arial" size="13.0" />
                </font>
             </Button>
-            <Text fill="#979393" layoutX="251.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="File Vault" wrappingWidth="297.2984313964844">
+            <Text fill="#979393" layoutX="251.0" layoutY="492.0" strokeType="OUTSIDE" strokeWidth="0.0" text="File Vault" wrappingWidth="297.2984313964844">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
             </Text>
-            <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#252728" height="35.0" layoutX="250.0" layoutY="308.0" stroke="#6f6c6c" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.05" width="97.0">
+            <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#252728" height="35.0" layoutX="250.0" layoutY="502.0" stroke="#6f6c6c" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.05" width="97.0">
                <effect>
                   <Blend />
                </effect>
             </Rectangle>
-            <Button fx:id="fileVaultOn" alignment="TOP_LEFT" layoutX="257.0" layoutY="313.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#saveFileVaultOn" prefHeight="25.0" prefWidth="36.0" styleClass="button" stylesheets="@styleSettings.css" text="On" textFill="#979393">
+            <Button fx:id="fileVaultOn" alignment="TOP_LEFT" layoutX="257.0" layoutY="507.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#saveFileVaultOn" prefHeight="25.0" prefWidth="36.0" styleClass="button" stylesheets="@styleSettings.css" text="On" textFill="#979393">
                <font>
                   <Font name="Arial" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="fileVaultOff" alignment="TOP_LEFT" layoutX="305.0" layoutY="313.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#saveFileVaultOff" prefHeight="25.0" prefWidth="35.0" styleClass="button" stylesheets="@styleSettings.css" text="Off" textFill="#979393">
+            <Button fx:id="fileVaultOff" alignment="TOP_LEFT" layoutX="305.0" layoutY="507.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#saveFileVaultOff" prefHeight="25.0" prefWidth="35.0" styleClass="button" stylesheets="@styleSettings.css" text="Off" textFill="#979393">
                <font>
                   <Font name="Arial" size="13.0" />
                </font>
@@ -266,6 +266,66 @@
                </font>
             </Button>
             <Button fx:id="AIModelButton1" alignment="CENTER" layoutX="380.0" layoutY="180.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#DefaultAIModel" prefHeight="25.0" prefWidth="107.0" styleClass="button" stylesheets="@styleSettings.css" text="Default" textFill="#979393">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Button>
+            <Text fill="#979393" layoutX="251.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Auto Backup " wrappingWidth="297.2984313964844">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Text>
+            <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#252728" height="35.0" layoutX="250.0" layoutY="306.0" stroke="#6f6c6c" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.05" width="97.0">
+               <effect>
+                  <Blend />
+               </effect>
+            </Rectangle>
+            <Button fx:id="fileVaultOn1" alignment="TOP_LEFT" layoutX="257.0" layoutY="311.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#saveFileVaultOn" prefHeight="25.0" prefWidth="36.0" styleClass="button" stylesheets="@styleSettings.css" text="On" textFill="#979393">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="fileVaultOff1" alignment="TOP_LEFT" layoutX="305.0" layoutY="311.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#saveFileVaultOff" prefHeight="25.0" prefWidth="35.0" styleClass="button" stylesheets="@styleSettings.css" text="Off" textFill="#979393">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Button>
+            <Text fill="#979393" layoutX="251.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AES Encryption" wrappingWidth="297.2984313964844">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Text>
+            <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#252728" height="35.0" layoutX="250.0" layoutY="373.0" stroke="#6f6c6c" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.05" width="97.0">
+               <effect>
+                  <Blend />
+               </effect>
+            </Rectangle>
+            <Button fx:id="fileVaultOn2" alignment="TOP_LEFT" layoutX="257.0" layoutY="378.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#saveFileVaultOn" prefHeight="25.0" prefWidth="36.0" styleClass="button" stylesheets="@styleSettings.css" text="On" textFill="#979393">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="fileVaultOff2" alignment="TOP_LEFT" layoutX="305.0" layoutY="378.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#saveFileVaultOff" prefHeight="25.0" prefWidth="35.0" styleClass="button" stylesheets="@styleSettings.css" text="Off" textFill="#979393">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Button>
+            <Text fill="#979393" layoutX="250.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EAU (Encrypt after upload)" wrappingWidth="297.2984313964844">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Text>
+            <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#252728" height="35.0" layoutX="249.0" layoutY="438.0" stroke="#6f6c6c" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.05" width="97.0">
+               <effect>
+                  <Blend />
+               </effect>
+            </Rectangle>
+            <Button fx:id="fileVaultOn21" alignment="TOP_LEFT" layoutX="256.0" layoutY="443.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#saveFileVaultOn" prefHeight="25.0" prefWidth="36.0" styleClass="button" stylesheets="@styleSettings.css" text="On" textFill="#979393">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="fileVaultOff21" alignment="TOP_LEFT" layoutX="304.0" layoutY="443.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#saveFileVaultOff" prefHeight="25.0" prefWidth="35.0" styleClass="button" stylesheets="@styleSettings.css" text="Off" textFill="#979393">
                <font>
                   <Font name="Arial" size="13.0" />
                </font>

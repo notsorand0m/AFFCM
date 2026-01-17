@@ -1,5 +1,7 @@
 package com.affcm;
 
+import java.io.File;
+
 // Class for json format
 public class Data{
     //Date date;
@@ -15,8 +17,9 @@ public class Data{
     public String automaticBackup;
     public String fileVault;
     public String tempFolder;
+    public String rawFile;
 
-    public Data(String log, String theme, String AIModel, String org_level, String archive_interval, String multithreading, String autoSleepControl, String thermalOptimization, String fileView, String automaticBackup, String fileVault, String temoFolder){
+    public Data(String log, String theme, String AIModel, String org_level, String archive_interval, String multithreading, String autoSleepControl, String thermalOptimization, String fileView, String automaticBackup, String fileVault, String temoFolder, String rawFile){
         //this.date = date;
         this.log = log;
         this.theme = theme;
@@ -30,6 +33,7 @@ public class Data{
         this.automaticBackup = automaticBackup;
         this.fileVault = fileVault;
         this.tempFolder = temoFolder;
+        this.rawFile = rawFile;
     }
 
     public Data() {
@@ -45,5 +49,6 @@ public class Data{
         this.automaticBackup = "";
         this.fileVault = "";
         this.tempFolder = "";
+        this.rawFile = "";
     }
 }

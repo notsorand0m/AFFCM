@@ -104,7 +104,7 @@
                         <Blend />
                     </effect>
                 </Rectangle>
-                <Button alignment="TOP_LEFT" layoutX="43.0" layoutY="188.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenCloudSync" prefHeight="25.0" prefWidth="148.0" stylesheets="@style.css" text="Cloud Sync" textFill="#979393">
+                <Button alignment="TOP_LEFT" layoutX="43.0" layoutY="188.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenEncryptDecryptPage" prefHeight="25.0" prefWidth="148.0" stylesheets="@style.css" text="AES Encryption" textFill="#979393">
                     <font>
                         <Font name="Arial" size="13.0" />
                     </font>
