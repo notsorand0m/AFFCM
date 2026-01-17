@@ -104,7 +104,7 @@
                         <Blend />
                     </effect>
                 </Rectangle>
-                <Button alignment="TOP_LEFT" layoutX="43.0" layoutY="188.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenEncryptDecryptPage prefHeight="25.0" prefWidth="148.0" stylesheets="@styleLite.css" text="AES Encryption" textFill="#979393">
+                <Button alignment="TOP_LEFT" layoutX="43.0" layoutY="188.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenEncryptDecryptPage" prefHeight="25.0" prefWidth="148.0" stylesheets="@styleLite.css" text="AES Encryption" textFill="#979393">
                     <font>
                         <Font name="Arial" size="13.0" />
                     </font>
@@ -180,7 +180,7 @@
                         <Font name="Arial" size="13.0" />
                     </font>
                 </Button>
-            <Button alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="277.0" layoutY="140.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="275.0" stylesheets="@styleBTNLite.css" text="Open decrypted file location" textFill="#b5aeae">
+            <Button alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="277.0" layoutY="140.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenDecryptedLocation" prefHeight="36.0" prefWidth="275.0" stylesheets="@styleBTNLite.css" text="Open decrypted file location" textFill="#b5aeae">
                <font>
                   <Font size="15.0" />
                </font>

@@ -59,7 +59,7 @@
                         <Blend />
                     </effect>
                 </Rectangle>
-                <Text fill="#979393" layoutX="94.0" layoutY="699.0" strokeType="OUTSIDE" strokeWidth="0.0" text="History">
+                <Text fill="#979393" layoutX="94.0" layoutY="699.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AES Encrypt/Decrypt">
                     <font>
                         <Font name="Arial" size="22.0" />
                     </font>

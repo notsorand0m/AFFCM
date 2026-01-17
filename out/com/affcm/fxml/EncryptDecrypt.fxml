@@ -180,22 +180,22 @@
                         <Font name="Arial" size="13.0" />
                     </font>
                 </Button>
-            <Text fill="#979393" layoutX="277.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Encrypt file" wrappingWidth="466.2984313964844">
+            <Text fill="#979393" layoutX="277.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Encrypt file:" wrappingWidth="466.2984313964844">
                <font>
                   <Font name="Arial" size="24.0" />
                </font>
             </Text>
-            <Button fx:id="" alignment="CENTER" blendMode="SRC_ATOP" layoutX="419.0" layoutY="145.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#BrowseFileToEncrypt" prefHeight="36.0" prefWidth="89.0" style="-fx-background-color: #282626;" text="Browse" textFill="#b5aeae">
+            <Button fx:id="" alignment="CENTER" blendMode="SRC_ATOP" layoutX="419.0" layoutY="145.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#BrowseFileToEncrypt" prefHeight="36.0" prefWidth="89.0" stylesheets="@styleBTN.css" text="Browse" textFill="#b5aeae">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Text fill="#979393" layoutX="278.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Decrypt file" wrappingWidth="466.2984313964844">
+            <Text fill="#979393" layoutX="278.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Decrypt file:" wrappingWidth="466.2984313964844">
                <font>
                   <Font name="Arial" size="24.0" />
                </font>
             </Text>
-            <Button alignment="CENTER" blendMode="SRC_ATOP" layoutX="420.0" layoutY="205.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#BrowseFileToDecrypt" prefHeight="36.0" prefWidth="89.0" style="-fx-background-color: #282626;" text="Browse" textFill="#b5aeae">
+            <Button alignment="CENTER" blendMode="SRC_ATOP" layoutX="420.0" layoutY="205.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#BrowseFileToDecrypt" prefHeight="36.0" prefWidth="89.0" stylesheets="@styleBTN.css" text="Browse" textFill="#b5aeae">
                <font>
                   <Font size="15.0" />
                </font>

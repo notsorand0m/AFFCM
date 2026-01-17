@@ -773,7 +773,7 @@ public class MainController{
     public void SaveEncryptedFileAs(ActionEvent event) throws Exception{
         try{
             File rawFilePacked = new File(UserService.getData1().rawFile);
-            finalEncryptedFile = new File(rawFilePacked.getParentFile().getAbsolutePath() + "/Encrypted" + rawFilePacked.getName() + ".enc");
+            finalEncryptedFile = new File(rawFilePacked.getParentFile().getAbsolutePath() + "/" + rawFilePacked.getName() + ".enc");
             encrypt(rawFilePacked, finalEncryptedFile, passwordToEncrypt.getText().toCharArray());
 
             if(UserService.getData1().theme.equals("Light")){
@@ -893,7 +893,7 @@ public class MainController{
     @FXML
     public void OpenDecryptedLocation(ActionEvent event) throws Exception{
         File rawFilePacked = new File(UserService.getData1().rawFile);
-        finalEncryptedFile = new File(rawFilePacked.getParentFile().getAbsolutePath() + removeLastExtension(rawFilePacked.getName()));
+        finalEncryptedFile = new File(rawFilePacked.getParentFile().getAbsolutePath() + "/decrypted" + removeLastExtension(rawFilePacked.getName()));
         new ProcessBuilder("open", rawFilePacked.getParentFile().getAbsolutePath()).start();
     }
 
