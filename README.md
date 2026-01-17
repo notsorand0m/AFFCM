@@ -3,7 +3,9 @@
 
 ### AI file path recommendation for specific used selected file
 ### Customizable AI model for more versatility
+### AES Encryption/Decryption
 ### Basic database .json system included 
+### Light/Dark Themes
 
 **Used libraries:**
   - javafx
