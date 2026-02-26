@@ -9,16 +9,80 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b532f64f-b022-4d94-9518-01d5a68e8f24" name="Changes" comment="Big update&#10;Including:&#10;More working lite pages&#10;Working AES Encryption">
+    <list default="true" id="b532f64f-b022-4d94-9518-01d5a68e8f24" name="Changes" comment="Stable">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/gson_2_13_2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AFFCM.jar" beforeDir="false" afterPath="$PROJECT_DIR$/AFFCM.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AFFCM.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AFFCM.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AFFCM.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/AFFCM.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/gson-2.10.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/controller/MainController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/controller/MainController$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/controller/MainController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/controller/MainController$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$4$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/controller/MainController$4$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/controller/MainController$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/controller/MainController$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/com/affcm/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/controller/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseFolderToSort.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseFolderToSort.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseFolderToSortLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseFolderToSortLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseModel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseModel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseModelLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/ChooseModelLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/Encrypt.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/Encrypt.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/EncryptDecrypt.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/EncryptDecrypt.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/EncryptDecryptLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/EncryptDecryptLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/EncryptLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/EncryptLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/FileDecryptedSuccsessfully.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/FileDecryptedSuccsessfully.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/FileDecryptedSuccsessfullyLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/FileDecryptedSuccsessfullyLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/FileEncryptedSuccsessfully.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/FileEncryptedSuccsessfully.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/FileEncryptedSuccsessfullyLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/FileEncryptedSuccsessfullyLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/History.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/History.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/LoadingScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/LoadingScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/MainLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/MainLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/OrganizationLevelNotSet.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/OrganizationLevelNotSet.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/OrganizationLevelNotSetLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/OrganizationLevelNotSetLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/PerformanceMode.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/PerformanceMode.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/RequirePassword.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/RequirePassword.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/RequirePasswordLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/RequirePasswordLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/Settings.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/SettingsLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/SettingsLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/Uploaded.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/Uploaded.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/WrongPassword.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/WrongPassword.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/WrongPasswordLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/WrongPasswordLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/fxml/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/fxml/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/com/affcm/service/ModelService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/com/affcm/service/ModelService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/affcm/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/affcm/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/affcm/service/ModelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/affcm/service/ModelService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/ChooseFolderToSort.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/ChooseFolderToSort.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/ChooseFolderToSortLite.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/ChooseModel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/ChooseModel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/ChooseModelLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/ChooseModelLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Encrypt.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Encrypt.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/EncryptDecrypt.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/EncryptDecrypt.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/EncryptDecryptLite.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/EncryptLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/EncryptLite.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fxml/FileDecryptedSuccsessfully.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/FileDecryptedSuccsessfully.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fxml/FileDecryptedSuccsessfullyLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/FileDecryptedSuccsessfullyLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/FileEncryptedSuccsessfully.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/FileEncryptedSuccsessfully.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fxml/FileEncryptedSuccsessfullyLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/FileEncryptedSuccsessfullyLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/History.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/History.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/LoadingScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/LoadingScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/MainLite.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/OrganizationLevelNotSet.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/OrganizationLevelNotSet.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/OrganizationLevelNotSetLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/OrganizationLevelNotSetLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/PerformanceMode.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/PerformanceMode.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/RequirePassword.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/RequirePassword.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/RequirePasswordLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/RequirePasswordLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Settings.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/SettingsLite.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Uploaded.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Uploaded.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/UploadedLite.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/WrongPassword.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/WrongPassword.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/WrongPasswordLite.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/WrongPasswordLite.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,30 +158,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.GPTClientCLI.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Build AFFCM.executor&quot;: &quot;Run&quot;,
-    &quot;JAR Application.AFFCM.jar.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.converter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.exc_model.executor&quot;: &quot;Run&quot;,
-    &quot;Python.smth.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/simeon/IdeaProjects/AFFCM/libs&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/simeon/IdeaProjects/AFFCM/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.28045976&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.GPTClientCLI.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Gradle.Build AFFCM.executor": "Run",
+    "JAR Application.AFFCM.jar (1).executor": "Run",
+    "JAR Application.AFFCM.jar.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.converter.executor": "Run",
+    "Python.exc_model.executor": "Run",
+    "Python.smth.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/simeon/IdeaProjects/AFFCM/libs",
+    "onboarding.tips.debug.path": "/Users/simeon/IdeaProjects/AFFCM/src/Main.java",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.28045976",
+    "settings.editor.selected.configurable": "advanced.settings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/libs" />
@@ -127,17 +192,17 @@
       <recent name="$PROJECT_DIR$/src/com/affcm" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/libs" />
+      <recent name="$PROJECT_DIR$/src/fxml" />
       <recent name="$PROJECT_DIR$/out/com/affcm" />
       <recent name="$PROJECT_DIR$/src/logs" />
-      <recent name="$PROJECT_DIR$/src/fxml" />
       <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/libs" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="main.java.com.affcm" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JAR Application.AFFCM.jar (1)">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="ms-17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -148,16 +213,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="AFFCM.jar (1)" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/libs/AFFCM.jar" />
+      <method v="2" />
+    </configuration>
     <configuration name="AFFCM.jar" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/proj/out/artifacts/AFFCM_jar/AFFCM.jar" />
       <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Application.Main" />
+      <item itemvalue="JAR Application.AFFCM.jar (1)" />
       <item itemvalue="JAR Application.AFFCM.jar" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JAR Application.AFFCM.jar (1)" />
         <item itemvalue="JAR Application.AFFCM.jar" />
       </list>
     </recent_temporary>
@@ -386,7 +457,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768645240059</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Fixes">
+      <option name="closed" value="true" />
+      <created>1768646579272</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1768646579272</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -415,7 +494,8 @@
     <MESSAGE value="Fixes/Deletes" />
     <MESSAGE value="Big update&#10;Including:&#10;Working themes for selected pages&#10;Working when converted to .app&#10;Working .json management" />
     <MESSAGE value="Big update&#10;Including:&#10;More working lite pages&#10;Working AES Encryption" />
-    <option name="LAST_COMMIT_MESSAGE" value="Big update&#10;Including:&#10;More working lite pages&#10;Working AES Encryption" />
+    <MESSAGE value="Fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -428,48 +508,45 @@
           <properties class="java.lang.RuntimeException" package="java.lang" />
           <option name="timeStamp" value="3" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
-          <line>497</line>
-          <properties class="com.affcm.controller.MainController" method="setRecommendedFolderAccepted">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
-          <line>296</line>
-          <properties class="com.affcm.controller.MainController" method="saveFileViewGallery">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
-          <line>628</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
-          <line>498</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
-          <line>541</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
-          <line>1437</line>
+          <line>1322</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
-          <line>826</line>
+          <line>747</line>
           <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
+          <line>1290</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
+          <line>963</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
+          <line>1241</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
+          <line>567</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
+          <line>1377</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/affcm/controller/MainController.java</url>
+          <line>298</line>
+          <option name="timeStamp" value="53" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

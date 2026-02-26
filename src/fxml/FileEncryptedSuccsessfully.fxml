@@ -79,7 +79,7 @@
                         <Font name="Arial" size="12.0" />
                     </font>
                 </Text>
-                <Text fill="#b5aeae" layoutX="1178.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000 GB" wrappingWidth="95.35250854492188">
+                <Text fx:id="freeSpace" fill="#b5aeae" layoutX="1178.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000 GB" wrappingWidth="95.35250854492188">
                     <font>
                         <Font name="Arial" size="12.0" />
                     </font>
@@ -140,12 +140,12 @@
                         <Font size="15.0" />
                     </font>
                 </Button>
-                <Button alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="935.0" layoutY="346.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="275.0" style="-fx-background-color: #282626;" text="Create folder" textFill="#b5aeae">
+                <Button alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="935.0" layoutY="346.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#CreateFolder" prefHeight="36.0" prefWidth="275.0" style="-fx-background-color: #282626;" text="Create folder" textFill="#b5aeae">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </Button>
-                <Button alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="936.0" layoutY="384.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="275.0" style="-fx-background-color: #282626;" text="Run AFS (AI File Sorting)" textFill="#b5aeae">
+                <Button alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="936.0" layoutY="384.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#AIFileSorting" prefHeight="36.0" prefWidth="275.0" style="-fx-background-color: #282626;" text="Run AFS (AI File Sorting)" textFill="#b5aeae">
                     <font>
                         <Font size="15.0" />
                     </font>
@@ -160,12 +160,12 @@
                         <Blend />
                     </effect>
                 </Rectangle>
-                <Text fill="#b5aeae" layoutX="1178.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000 GB" wrappingWidth="95.35250854492188">
+                <Text fx:id="totalSpace" fill="#b5aeae" layoutX="1178.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000 GB" wrappingWidth="95.35250854492188">
                     <font>
                         <Font name="Arial" size="12.0" />
                     </font>
                 </Text>
-                <Text fill="#b5aeae" layoutX="942.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Storage used" wrappingWidth="144.08438110351562">
+                <Text fill="#b5aeae" layoutX="942.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total space" wrappingWidth="144.08438110351562">
                     <font>
                         <Font name="Arial" size="12.0" />
                     </font>

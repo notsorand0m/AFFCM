@@ -19,27 +19,7 @@
                         <Blend />
                     </effect>
                 </Rectangle>
-                <Text fill="#979393" layoutX="249.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Organized today" wrappingWidth="297.2984313964844">
-                    <font>
-                        <Font name="Arial" size="24.0" />
-                    </font>
-                </Text>
                 <Button alignment="TOP_LEFT" layoutX="43.0" layoutY="74.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenHomePage" prefHeight="25.0" prefWidth="126.0" stylesheets="@style.css" text="Home" textFill="#979393">
-                    <font>
-                        <Font name="Arial" size="13.0" />
-                    </font>
-                </Button>
-                <Button alignment="TOP_LEFT" layoutX="43.0" layoutY="102.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenAIOrganizePage" prefHeight="25.0" prefWidth="148.0" stylesheets="@style.css" text="AI Organize" textFill="#979393">
-                    <font>
-                        <Font name="Arial" size="13.0" />
-                    </font>
-                </Button>
-                <Button alignment="TOP_LEFT" layoutX="43.0" layoutY="130.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenArchive" prefHeight="25.0" prefWidth="148.0" stylesheets="@style.css" text="Archive" textFill="#979393">
-                    <font>
-                        <Font name="Arial" size="13.0" />
-                    </font>
-                </Button>
-                <Button alignment="TOP_LEFT" layoutX="43.0" layoutY="158.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#UpdateHistory" prefHeight="25.0" prefWidth="148.0" stylesheets="@style.css" text="History" textFill="#979393">
                     <font>
                         <Font name="Arial" size="13.0" />
                     </font>
@@ -55,16 +35,6 @@
                     </effect>
                 </Rectangle>
                 <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#252728" height="177.0" layoutX="896.0" layoutY="81.0" stroke="#282626" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" width="383.0">
-                    <effect>
-                        <Blend />
-                    </effect>
-                </Rectangle>
-                <Text fill="#979393" layoutX="247.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Needs review" wrappingWidth="539.7638854980469">
-                    <font>
-                        <Font name="Arial" size="24.0" />
-                    </font>
-                </Text>
-                <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#252728" height="111.0" layoutX="247.0" layoutY="300.0" stroke="#6f6c6c" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.05" width="297.0">
                     <effect>
                         <Blend />
                     </effect>
@@ -89,29 +59,14 @@
                         <Font name="Arial" size="25.0" />
                     </font>
                 </Text>
-                <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#2e3132" height="8.0" layoutX="941.0" layoutY="192.0" stroke="#948e8e" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="287.0">
-                    <effect>
-                        <Blend />
-                    </effect>
-                </Rectangle>
-                <Text fill="#b5aeae" layoutX="942.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Free space" wrappingWidth="144.08438110351562">
+                <Text fill="#979393" layoutX="942.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Free space" wrappingWidth="144.08438110351562">
                     <font>
                         <Font name="Arial" size="12.0" />
                     </font>
                 </Text>
-                <Text fill="#b5aeae" layoutX="1178.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000 GB" wrappingWidth="95.35250854492188">
+                <Text fx:id="freeSpace" fill="#b5aeae" layoutX="1028.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000 GB" wrappingWidth="95.35250854492188">
                     <font>
                         <Font name="Arial" size="12.0" />
-                    </font>
-                </Text>
-                <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#252728" height="166.0" layoutX="898.0" layoutY="275.0" stroke="#282626" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" width="383.0">
-                    <effect>
-                        <Blend />
-                    </effect>
-                </Rectangle>
-                <Text fill="#b5aeae" layoutX="911.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quick actions" wrappingWidth="348.7661437988281">
-                    <font>
-                        <Font name="Arial" size="25.0" />
                     </font>
                 </Text>
                 <Button alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="1407.0" layoutY="272.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="14.0" prefWidth="90.0" style="-fx-background-color: #282626;" text="Upload" textFill="#b5aeae">
@@ -119,22 +74,12 @@
                         <Font size="7.0" />
                     </font>
                 </Button>
-                <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#252728" height="263.0" layoutX="897.0" layoutY="458.0" stroke="#282626" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" width="383.0">
+                <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#252728" height="447.0" layoutX="897.0" layoutY="274.0" stroke="#282626" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" width="383.0">
                     <effect>
                         <Blend />
                     </effect>
                 </Rectangle>
-                <Button alignment="TOP_LEFT" layoutX="43.0" layoutY="188.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenEncryptDecryptPage" prefHeight="25.0" prefWidth="148.0" stylesheets="@style.css" text="AES Encryption" textFill="#979393">
-                    <font>
-                        <Font name="Arial" size="13.0" />
-                    </font>
-                </Button>
-                <Button alignment="TOP_LEFT" layoutX="43.0" layoutY="216.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenPerformanceModePage" prefHeight="25.0" prefWidth="148.0" stylesheets="@style.css" text="Performance mode" textFill="#979393">
-                    <font>
-                        <Font name="Arial" size="13.0" />
-                    </font>
-                </Button>
-                <Button alignment="TOP_LEFT" layoutX="43.0" layoutY="244.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenPluginPage" prefHeight="25.0" prefWidth="148.0" styleClass="button" stylesheets="@style.css" text="Plugins" textFill="#979393">
+                <Button alignment="TOP_LEFT" layoutX="43.0" layoutY="101.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenEncryptDecryptPage" prefHeight="25.0" prefWidth="148.0" stylesheets="@style.css" text="AES Encryption" textFill="#979393">
                     <font>
                         <Font name="Arial" size="13.0" />
                     </font>
@@ -144,90 +89,124 @@
                         <Image url="@Downloads/typcn-home.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="29.0" layoutY="79.0" opacity="0.7">
+                <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="26.0" layoutY="79.0" opacity="0.7">
                     <image>
                         <Image url="@Downloads/typcn-home.png" />
                     </image>
                 </ImageView>
-                <Button layoutX="1040.0" layoutY="30.0" mnemonicParsing="false" style="-fx-background-image: url(&quot;ri-settings-line.png&quot;);" text="Button" />
                 <ImageView id="iView" layoutX="1188.0" layoutY="-6.0" onMouseClicked="#OpenPluginPage">
                     <image>
                         <Image url="@ri-settings-line.png" />
                     </image>
                 </ImageView>
-                <Button fx:id="upload" alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="936.0" layoutY="309.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#UploadFile" prefHeight="36.0" prefWidth="275.0" stylesheets="@styleBTN.css" text="Upload" textFill="#b5aeae">
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </Button>
-                <Button alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="935.0" layoutY="346.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#CreateFolder" prefHeight="36.0" prefWidth="275.0" stylesheets="@styleBTN.css" text="Create folder" textFill="#b5aeae">
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </Button>
-                <Button alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="936.0" layoutY="384.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#AIFileSorting" prefHeight="36.0" prefWidth="275.0" stylesheets="@styleBTN.css" text="Run AFS (AI File Sorting)" textFill="#b5aeae">
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </Button>
-                <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#252728" height="135.0" layoutX="718.0" layoutY="121.0" stroke="#6f6c6c" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.05" width="135.0">
+                <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#252728" height="143.0" layoutX="564.0" layoutY="146.0" stroke="#6f6c6c" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.05" width="198.0">
                     <effect>
                         <Blend />
                     </effect>
                 </Rectangle>
-                <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#252728" height="111.0" layoutX="564.0" layoutY="300.0" stroke="#6f6c6c" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.05" width="294.0">
+                <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#252728" height="143.0" layoutX="248.0" layoutY="146.0" stroke="#6f6c6c" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.05" width="295.0">
                     <effect>
                         <Blend />
                     </effect>
                 </Rectangle>
-                <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#252728" height="135.0" layoutX="564.0" layoutY="120.0" stroke="#6f6c6c" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.05" width="135.0">
-                    <effect>
-                        <Blend />
-                    </effect>
-                </Rectangle>
-                <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#252728" height="135.0" layoutX="248.0" layoutY="120.0" stroke="#6f6c6c" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.05" width="295.0">
-                    <effect>
-                        <Blend />
-                    </effect>
-                </Rectangle>
-                <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#2e3132" height="8.0" layoutX="942.0" layoutY="148.0" stroke="#948e8e" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="287.0">
-                    <effect>
-                        <Blend />
-                    </effect>
-                </Rectangle>
-                <Text fill="#b5aeae" layoutX="1178.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000 GB" wrappingWidth="95.35250854492188">
+                <Text fx:id="totalSpace" fill="#b5aeae" layoutX="1028.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000 GB" wrappingWidth="95.35250854492188">
                     <font>
                         <Font name="Arial" size="12.0" />
                     </font>
                 </Text>
-                <Text fill="#b5aeae" layoutX="942.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Storage used" wrappingWidth="144.08438110351562">
+                <Text fill="#979393" layoutX="942.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total space" wrappingWidth="76.97158813476562">
                     <font>
                         <Font name="Arial" size="12.0" />
                     </font>
                 </Text>
-                <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#4b4094" height="8.0" layoutX="942.0" layoutY="148.0" stroke="#948e8e" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="121.0">
-                    <effect>
-                        <Blend />
-                    </effect>
-                </Rectangle>
-            <Button alignment="TOP_LEFT" layoutX="44.0" layoutY="278.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenSettingsPage" prefHeight="25.0" prefWidth="148.0" styleClass="button" stylesheets="@style.css" text="Settings" textFill="#979393">
+            <Button alignment="TOP_LEFT" layoutX="44.0" layoutY="129.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenSettingsPage" prefHeight="25.0" prefWidth="148.0" styleClass="button" stylesheets="@style.css" text="Settings" textFill="#979393">
                <font>
                   <Font name="Arial" size="13.0" />
                </font>
             </Button>
-            <Button alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="939.0" layoutY="468.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#ScanFolders" prefHeight="36.0" prefWidth="275.0" stylesheets="@styleBTN.css" text="Scan folders" textFill="#b5aeae">
+            <Button alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="570.0" layoutY="148.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#ScanFolders" prefHeight="36.0" prefWidth="178.0" stylesheets="@styleBTN.css" text="Scan folders" textFill="#b5aeae">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="940.0" layoutY="509.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#ScanCustomFolder" prefHeight="36.0" prefWidth="275.0" stylesheets="@styleBTN.css" text="Scan custom folder" textFill="#b5aeae">
+            <Button alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="571.0" layoutY="189.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#ScanCustomFolder" prefHeight="36.0" prefWidth="178.0" stylesheets="@styleBTN.css" text="Scan custom folder" textFill="#b5aeae">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
             <Text fill="#979393" layoutX="267.0" layoutY="607.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AFFCM Software Created by Simeon Velev" wrappingWidth="295.21630859375" />
-            <Text fill="#979393" layoutX="267.0" layoutY="627.0" strokeType="OUTSIDE" strokeWidth="0.0" text="November 2025" wrappingWidth="295.21630859375" />
+            <Text fill="#979393" layoutX="267.0" layoutY="627.0" strokeType="OUTSIDE" strokeWidth="0.0" text="October 2025 - February 2026" wrappingWidth="295.21630859375" />
             <Text fill="#979393" layoutX="266.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AFFCM App is project made for making easier the sorting of files in AI recommended folders. AI Model is customizable so the user has flexability. The project is being currently posted as open source." wrappingWidth="576.21630859375" />
+            <Text fill="#979393" layoutX="250.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quick actions" wrappingWidth="278.1394958496094">
+               <font>
+                  <Font name="Arial" size="25.0" />
+               </font>
+            </Text>
+            <Button fx:id="upload" alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="261.0" layoutY="149.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#UploadFile" prefHeight="36.0" prefWidth="248.0" stylesheets="@styleBTN.css" text="Upload" textFill="#b5aeae">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="260.0" layoutY="192.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#CreateFolder" prefHeight="36.0" prefWidth="250.0" stylesheets="@styleBTN.css" text="Create folder" textFill="#b5aeae">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="261.0" layoutY="236.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#AIFileSorting" prefHeight="36.0" prefWidth="249.0" stylesheets="@styleBTN.css" text="Run AFS (AI File Sorting)" textFill="#b5aeae">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" blendMode="SRC_ATOP" layoutX="924.0" layoutY="324.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenReadme" prefHeight="36.0" prefWidth="178.0" stylesheets="@styleBTN.css" text="Readme" textFill="#b5aeae">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" blendMode="SRC_ATOP" layoutX="936.0" layoutY="496.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#OpenGitHub" prefHeight="36.0" prefWidth="186.0" stylesheets="@styleBTN.css" text="GitHub" textFill="#b5aeae">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Text fill="#b5aeae" layoutX="911.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Support">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+            <Text fill="#b5aeae" layoutX="911.0" layoutY="482.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Socials">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+            <ImageView layoutX="908.0" layoutY="279.0" opacity="0.7" scaleX="0.3" scaleY="0.2" scaleZ="0.5">
+               <image>
+                  <Image url="@ReadMeIcon.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="195.0" fitWidth="200.0" layoutX="820.0" layoutY="416.0" opacity="0.7" scaleX="0.1" scaleY="0.1">
+               <image>
+                  <Image url="@GitHubIcon.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="120.0" fitWidth="121.0" layoutX="13.0" layoutY="630.0" scaleX="0.18" scaleY="0.18">
+               <image>
+                  <Image url="@HomePageIcon.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="120.0" fitWidth="121.0" layoutX="-29.0" layoutY="26.0" scaleX="0.1" scaleY="0.09">
+               <image>
+                  <Image url="@HomePageIcon.png" />
+               </image>
+            </ImageView>
+            <ImageView fitWidth="111.0" layoutX="-26.0" layoutY="99.0" scaleX="0.15" scaleY="0.2">
+               <image>
+                  <Image url="@EncryptionIcon.png" />
+               </image>
+            </ImageView>
+            <ImageView layoutX="-63.0" layoutY="87.0" scaleX="0.08" scaleY="0.1">
+               <image>
+                  <Image url="@Settings.png" />
+               </image>
+            </ImageView>
             </children>
         </Pane>
     </center>

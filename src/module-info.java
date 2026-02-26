@@ -7,6 +7,8 @@ module AFFCM {
     requires java.desktop;
     requires llama;
     requires org.slf4j;
+    requires com.github.oshi;
+    requires com.sun.jna;
 
     exports com.affcm;
     exports com.affcm.controller;

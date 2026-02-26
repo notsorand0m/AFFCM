@@ -1,16 +1,10 @@
 package com.affcm.controller;
 
-import javafx.scene.control.Alert;
+import com.affcm.Data;
+import com.affcm.service.*;
+
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
-import com.affcm.Data;
-import com.affcm.service.ModelService;
-import com.affcm.service.UserService;
-import com.affcm.service.JSONControl;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,22 +14,20 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.crypto.*;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.awt.event.MouseAdapter;
+
+import com.google.gson.*;
+
 import java.io.*;
+import java.net.URI;
 import java.nio.file.Paths;
 import java.security.SecureRandom;
-import java.security.spec.ECField;
 import java.security.spec.KeySpec;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -44,14 +36,12 @@ import java.awt.Desktop;
 
 public class MainController{
 
-    private static final Logger log = LoggerFactory.getLogger(MainController.class);
-    // Chatgpt
-    private final String OSName = System.getProperty("user.name");
+    static final int SALT_LENGTH = 16; // bytes
+    static final int IV_LENGTH = 12; // bytes
+    static final int ITERATIONS = 100_000;
+    static final int KEY_LENGTH = 256; // AES-256
 
-    private static final int SALT_LENGTH = 16; // bytes
-    private static final int IV_LENGTH = 12; // bytes
-    private static final int ITERATIONS = 100_000;
-    private static final int KEY_LENGTH = 256; // AES-256
+    public ExecutorService service = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
     @FXML
     public BorderPane rootPane;
@@ -114,6 +104,7 @@ public class MainController{
     public Button RecommendedFolderDeclined;
     @FXML
     public Button RecommendedFolderTryAgain;
+
     public String setFolder = "";
     @FXML
     public Button OrganizeDesktopID;
@@ -127,27 +118,28 @@ public class MainController{
     public Button AIModelButton;
     public String AIModelName;
     public String multithreadingState;
-    public ExecutorService service;
-    public int oldTotal;
     @FXML
     public Text historyText;
     @FXML
     TextArea passwordToCheck;
     @FXML
     TextArea passwordToEncrypt;
-    @FXML
-    Button OpenDecryptedFileLocation;
 
-    File rawFile;
-    File encryptedFile;
     File finalEncryptedFile;
-    File finalFile;
 
-    // @FXML
-    // TextArea passwordToEncrypt;
+    private Runnable Accepted;
+    private static int currentFile;
+    private File publicFile;
+    static List<File> contentDownloads;
+    List<String> foldersForModel;
 
     public static Path oldDirectory;
     public static Path newDirectory;
+
+    @FXML
+    public Text freeSpace = new Text();;
+    @FXML
+    public Text totalSpace = new Text();;
 
     @FXML
     public void initialize() throws Exception{
@@ -156,15 +148,34 @@ public class MainController{
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             Data data = gson.fromJson(reader, Data.class);
 
-            multithreadingState = UserService.getData1().multithreading;
-            service = Executors.newFixedThreadPool(2);
-
-            if(multithreadingState.equals("On")){
-                System.out.println("initialize: multithreading turned on");
-            }
-
         }
         catch (Exception ignored){
+        }
+
+        File[] roots = File.listRoots();
+
+        long free = 0;
+        long total = 0;
+
+        for(int i = 0; i < roots.length; i++){
+            free += roots[i].getFreeSpace();
+            total += roots[i].getTotalSpace();
+        }
+
+        if(freeSpace.equals(null)){
+            freeSpace = new Text();
+            freeSpace.setText(free / (1024 * 1024 * 1024) + " GB");
+        }
+        else{
+            freeSpace.setText(free / (1024 * 1024 * 1024) + " GB");
+        }
+
+        if(totalSpace.equals(null)){
+            freeSpace = new Text();
+            totalSpace.setText(total / (1024 * 1024 * 1024) +  " GB");
+        }
+        else{
+            totalSpace.setText(total / (1024 * 1024 * 1024) +  " GB");
         }
 
     }
@@ -210,7 +221,6 @@ public class MainController{
     public void savePassiveAI() throws Exception{
         UserService.setData1org_level(passiveAI.getText());
         UserService.setData1log("Changed organization level to passive | " + LocalDateTime.now());
-        // historyText.setText(UserService.data.log);
         JSONControl.json_saver(UserService.getData1());
     }
 
@@ -258,63 +268,15 @@ public class MainController{
 
     }
 
-    public void saveSleepControlOn() throws Exception{
-        UserService.setSleepControl(sleepControlOn.getText());
-        UserService.setData1log("Sleep control was changed to on" + LocalDateTime.now());
-        JSONControl.json_saver(UserService.getData1());
-    }
-
-    public void saveSleepControlOff() throws Exception{
-        UserService.setSleepControl(sleepControlOff.getText());
-        UserService.setData1log("Sleep control was changed to off" + LocalDateTime.now());
-        JSONControl.json_saver(UserService.getData1());
-    }
-
-    public void saveThermalOptimizationOn() throws Exception{
-        UserService.setThermalOptimization(thermalOptimizationOn.getText());
-        UserService.setData1log("Thermal optimization was changed to on" + LocalDateTime.now() );
-        JSONControl.json_saver(UserService.getData1());
-    }
-
-    public void saveThermalOptimizationOff() throws Exception{
-        UserService.setThermalOptimization(thermalOptimizationOff.getText());
-        UserService.setData1log("Thermal optimization was changed to off" + LocalDateTime.now() );
-        JSONControl.json_saver(UserService.getData1());
-    }
-
     public void saveFileViewGrid() throws Exception{
         UserService.setFileView(fileViewGrid.getText());
         UserService.setData1log("File view was changed to grid" + LocalDateTime.now());
         JSONControl.json_saver(UserService.getData1());
     }
 
-    public void saveFileViewList() throws Exception{
-        UserService.setFileView(fileViewList.getText());
-        UserService.setData1log("File view was changed to list" + LocalDateTime.now());
-        JSONControl.json_saver(UserService.getData1());
-    }
-
-    public void saveFileViewGallery() throws Exception{
-        UserService.setFileView(fileViewGallery.getText());
-        UserService.setData1log("File view was changed to gallery" + LocalDateTime.now());
-        JSONControl.json_saver(UserService.getData1());
-    }
-
     public void saveAutomaticBackupDaily() throws Exception{
         UserService.setAutomaticBackup(automaticBackupDaily.getText());
         UserService.setData1log("Automatic backup was changed to daily " + LocalDateTime.now());
-        JSONControl.json_saver(UserService.getData1());
-    }
-
-    public void saveAutomaticBackupMonthly() throws Exception{
-        UserService.setAutomaticBackup(automaticBackupMonthly.getText());
-        UserService.setData1log("Automatic backup was changed to monthly " + LocalDateTime.now());
-        JSONControl.json_saver(UserService.getData1());
-    }
-
-    public void saveAutomaticBackupCustom() throws Exception{
-        UserService.setAutomaticBackup(automaticBackupCustom.getText());
-        UserService.setData1log("Automatic backup was changed to custom " + LocalDateTime.now());
         JSONControl.json_saver(UserService.getData1());
     }
 
@@ -330,181 +292,113 @@ public class MainController{
         JSONControl.json_saver(UserService.getData1());
     }
 
-    public List<String> findDirectoriesDocuments() throws Exception{
-
-        File downloads = new File("/Users/" + OSName + "/Documents");
-
-        File[] contentDocuments = downloads.listFiles();
-
-        int counter = contentDocuments.length;
-        List<String> directoriesDocuments = new ArrayList<>();
-
-        Runnable task = () -> {
-            for (int i = 0; i < contentDocuments.length; i++) {
-                if (contentDocuments[i].isDirectory()) {
-                    directoriesDocuments.add(contentDocuments[i].toString());
-                }
-            }
-        };
-
-        if(multithreadingState.equals("On")){
-            while(counter > 0){
-                service.submit(task);
-                counter--;
-            }
-        }
-        else {
-            while (counter > 0) {
-                for (int i = 0; i < contentDocuments.length; i++) {
-                    if (contentDocuments[i].isDirectory()) {
-                        directoriesDocuments.add(contentDocuments[i].toString());
-                    }
-                    counter--;
-                }
-            }
-        }
-
-        directoriesDocuments.remove("/Users/simeon");
-
-        for(int i = 0; i < directoriesDocuments.toArray().length; i++){
-            System.out.println(directoriesDocuments.get(i));
-        }
-
-        return directoriesDocuments;
-    }
-
-    public List<String> findDirectoriesDownloads(File downloads) throws Exception{
+    public List<String> findDirectories(File folder) throws Exception{
 
         // File downloads = new File("/Users/" + OSName + "/Downloads");
 
-        File[] contentDownloads = downloads.listFiles();
+        File[] content = folder.listFiles();
 
-        int counter = contentDownloads.length;
-        List<String> directoriesDownloads = new ArrayList<>();
+        int counter = content.length;
+        List<String> directories = new ArrayList<>();
 
-        Runnable task = () -> {
-            for (int i = 0; i < contentDownloads.length; i++) {
-                if (contentDownloads[i].isDirectory()) {
-                    directoriesDownloads.add(contentDownloads[i].toString());
-                }
-            }
-        };
+//        Runnable task = () -> {
+//            for (int i = 0; i < content.length; i++) {
+//                if (content[i].isDirectory()) {
+//                    directories.add(content[i].toString());
+//                }
+//            }
+//        };
 
-                //service.submit(task);
-                //counter--;
-
-
-
-            while (counter > 0) {
-                for (int i = 0; i < contentDownloads.length; i++) {
-                    if (contentDownloads[i].isDirectory()) {
-                        directoriesDownloads.add(contentDownloads[i].toString());
+                for (int i = 0; i < content.length; i++) {
+                    if (content[i].isDirectory()) {
+                        directories.add(content[i].toString());
                     }
                     counter--;
                 }
-            }
 
 
-        for(int i = 0; i < directoriesDownloads.toArray().length; i++){
-            System.out.println(directoriesDownloads.get(i));
+
+        for(int i = 0; i < directories.toArray().length; i++){
+            System.out.println(directories.get(i));
         }
 
-        return directoriesDownloads;
+        return directories;
     }
 
-    public List<String> findDirectoriesDesktop() throws Exception{
-
-        File downloads = new File("/Users/" + OSName + "/Desktop");
-
-        File[] contentDesktop = downloads.listFiles();
-
-        int counter = contentDesktop.length;
-        List<String> directoriesDesktop = new ArrayList<>();
-
-        Runnable task = () -> {
-            for (int i = 0; i < contentDesktop.length; i++) {
-                if (contentDesktop[i].isDirectory()) {
-                    directoriesDesktop.add(contentDesktop[i].toString());
-                }
-            }
-        };
-
-        if(multithreadingState.equals("On")){
-            while(counter > 0){
-                service.submit(task);
-                counter--;
-            }
-        }
-        else {
-            while (counter > 0) {
-                for (int i = 0; i < contentDesktop.length; i++) {
-                    if (contentDesktop[i].isDirectory()) {
-                        directoriesDesktop.add(contentDesktop[i].toString());
-                    }
-                    counter--;
-                }
-            }
-        }
-
-        for(int i = 0; i < directoriesDesktop.toArray().length; i++){
-            System.out.println(directoriesDesktop.get(i));
-        }
-
-        return directoriesDesktop;
+    public void setOnAccepted(Runnable runnable){
+        Accepted = runnable;
     }
 
-    public List<String> findDirectoriesPictures() throws Exception{
+    @FXML
+    public void btnAccepted(ActionEvent event) throws Exception{
+        Accepted.run();
+    }
 
-        File downloads = new File("/Users/" + OSName + "/Pictures");
+    @FXML
+    public void tryAgain(ActionEvent event) throws Exception{
+        currentFile--;
+        processNextFile();
+    }
 
-        File[] contentPictures = downloads.listFiles();
+    public void processNextFile() {
+        if (contentDownloads == null || contentDownloads.isEmpty()) {
+            return;
+        }
 
-        int counter = contentPictures.length;
-        List<String> directoriesPictures = new ArrayList<>();
-
-        Runnable task = () -> {
-            for (int i = 0; i < contentPictures.length; i++) {
-                if (contentPictures[i].isDirectory()) {
-                    directoriesPictures.add(contentPictures[i].toString());
-                }
+        Task<String> task = new Task<>() {
+            @Override
+            protected String call() throws Exception {
+                // .call(directories, file)
+                folder = ModelService.call(findDirectories(contentDownloads.get(currentFile).getParentFile()), contentDownloads.get(currentFile));
+                oldDirectory = contentDownloads.get(currentFile).toPath().toAbsolutePath();
+                newDirectory = Path.of(folder + contentDownloads.get(currentFile).getName());
+                return folder;
             }
         };
 
-        if(multithreadingState.equals("On")){
-            while(counter > 0){
-                service.submit(task);
-                counter--;
-            }
-        }
-        else {
-            while (counter > 0) {
-                for (int i = 0; i < contentPictures.length; i++) {
-                    if (contentPictures[i].isDirectory()) {
-                        directoriesPictures.add(contentPictures[i].toString());
+        task.setOnSucceeded(event -> {
+            try {
+                String fxml = UserService.getData1().theme.equals("Light") ?
+                        "/com/affcm/fxml/UploadedLite.fxml" : "/com/affcm/fxml/UploadedCycle.fxml";
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+                Parent layout = loader.load();
+                MainController controller = loader.getController();
+
+                controller.recommended_folder.setText("Recommended folder: " + folder + "/" + contentDownloads.get(currentFile).getName());
+
+                controller.setOnAccepted(() -> {
+                    try {
+                        Files.move(oldDirectory, newDirectory, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+
+                        UserService.setData1log("Moved file: " + contentDownloads.get(currentFile).getName() + " | " + LocalDateTime.now());
+                        JSONControl.json_saver(UserService.getData1());
+
+                        currentFile++;
+                        processNextFile();
+                    } catch (Exception ignored) {
+
                     }
-                    counter--;
-                }
+                });
+
+                rootPane.getChildren().setAll(layout);
+            } catch (Exception ignored) {
+
             }
-        }
+        });
 
-        for(int i = 0; i < directoriesPictures.toArray().length; i++){
-            System.out.println(directoriesPictures.get(i));
-        }
-
-        return directoriesPictures;
+        service.submit(task);
     }
 
     @FXML
     public void setRecommendedFolderAccepted(ActionEvent event) throws Exception{
         try {
-            // For debugging
-//            System.out.println(oldDirectory);
-//            System.out.println(newDirectory);
-            Files.move(oldDirectory, newDirectory);
+            Files.move(oldDirectory, newDirectory, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
         }
         catch (Exception ignored){
 
         }
+
         if(UserService.getData1().theme.equals("Light")){
             Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/MainLite.fxml")));
             rootPane.getChildren().setAll(fxmlLoader);
@@ -518,6 +412,7 @@ public class MainController{
             rootPane.getChildren().setAll(fxmlLoader);
         }
     }
+
 
     @FXML
     public void setRecommendedFolderDeclined(ActionEvent event) throws Exception{
@@ -537,6 +432,26 @@ public class MainController{
     }
 
     @FXML
+    public void setRecommendedFolderDeclinedAFS(ActionEvent event) throws Exception{
+        // FIX
+        processNextFile();
+
+//        if(UserService.getData1().theme.equals("Light")){
+//            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/MainLite.fxml")));
+//            rootPane.getChildren().setAll(fxmlLoader);
+//        }
+//        else if(UserService.getData1().theme.equals("Dark")){
+//            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
+//            rootPane.getChildren().setAll(fxmlLoader);
+//        }
+//        else{
+//            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
+//            rootPane.getChildren().setAll(fxmlLoader);
+//        }
+
+    }
+
+    @FXML
     public void UploadFile(ActionEvent event) throws Exception {
 
         FileChooser fileChooser = new FileChooser();
@@ -546,17 +461,18 @@ public class MainController{
         oldDirectory = Path.of(file.getAbsolutePath());
 
         // For debugging
-        System.out.println(oldDirectory.toString());
+        // System.out.println(oldDirectory.toString());
 
-        File downloads = Paths.get(System.getProperty("user.home"), "Downloads").toFile();
+        // File downloads = Paths.get(System.getProperty("user.home"), "Downloads").toFile();
+        File fileFolder = new File(file.getParent());
+        // FIX
+        // So the user can choose between folders to sort the file into
 
         Task<String> task1 = new Task<>() {
             @Override
             protected String call() throws Exception {
                 if(file.isFile()) {
-//                    UserService.getData1().tempFolder = file.toPath().toString();
-//                    JSONControl.json_saver(UserService.getData1());
-                    List<String> listDownloads = findDirectoriesDownloads(downloads);
+                    List<String> listDownloads = findDirectories(fileFolder);
 
                     if(!UserService.getData1().AIModel.isEmpty()){
                         folder = ModelService.call(listDownloads, file);
@@ -570,6 +486,7 @@ public class MainController{
                     else{
                         if(UserService.getData1().theme.equals("Light")){
                             OpenChooseModelPage(new ActionEvent());
+                            // Fix some day to be redirect again to modelservice.call
                         }
                         else if(UserService.getData1().theme.equals("Dark")){
                             OpenChooseModelPage(new ActionEvent());
@@ -608,7 +525,7 @@ public class MainController{
 
                     // Creates new instance of the controller
                     MainController controller = loader.getController();
-                    controller.recommended_folder.setText("Recommended location: " + folder);
+                    controller.recommended_folder.setText("Recommended location: " + folder + "/" + file.getName());
 
                     // Shows the windows with the new instance of MainController :)
                     rootPane.getChildren().setAll(window);
@@ -636,15 +553,8 @@ public class MainController{
 
 
         });
-        multithreadingState = UserService.getData1().multithreading;
-        if(multithreadingState.equals("On")){
-            service.submit(task1);
-        }
-        else{
-            ExecutorService service1 = Executors.newFixedThreadPool(2);
-            service1.submit(task1);
-        }
 
+        service.submit(task1);
 
     }
 
@@ -655,8 +565,18 @@ public class MainController{
 
     @FXML
     public void AIFileSorting(ActionEvent event) throws Exception{
-        Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseFolderToSort.fxml")));
-        rootPane.getChildren().setAll(fxmlLoader);
+        if(UserService.getData1().theme.equals("Light")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseFolderToSortLite.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else if(UserService.getData1().theme.equals("Dark")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseFolderToSort.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else{
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseFolderToSort.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
     }
 
     @FXML
@@ -670,6 +590,7 @@ public class MainController{
     @FXML
     public void encrypt(File file, File finalFile, char[] pass) throws Exception{
         byte[] salt = new byte[SALT_LENGTH];
+        // Secure random to be unpredicted
         SecureRandom random = new SecureRandom();
         random.nextBytes(salt);
 
@@ -899,117 +820,39 @@ public class MainController{
 
     @FXML
     public void OrganizeDesktop(ActionEvent event) throws Exception{
-        File downloads = new File("/Users/" + OSName + "/Desktop");
+        File downloads = Paths.get(System.getProperty("user.home"), "Desktop").toFile();
 
-        File[] contentDownloads = downloads.listFiles();
+        contentDownloads = Arrays.stream(downloads.listFiles())
+                .filter(File::isFile)
+                .toList();
 
-        int counter = contentDownloads.length;
-        List<String> directoriesDownloads = new ArrayList<>();
-
-        for (int i = 0; i < contentDownloads.length; i++) {
-            if (contentDownloads[i].isFile()) {
-                oldDirectory = Path.of(contentDownloads[i].getAbsolutePath());
-
-                DirectoryChooser dirChooser = new DirectoryChooser();
-                dirChooser.setTitle("Choose a folder");
-                Stage stage = new Stage();
-                File downloads2 = dirChooser.showDialog(stage);
-
-                folder = ModelService.call(findDirectoriesDownloads(downloads2), contentDownloads[i]);
-                newDirectory = Path.of(folder, contentDownloads[i].getName());
-
-                System.out.println(contentDownloads[i] + " is going to: " + folder);
-                System.out.println("old is: " + oldDirectory);
-                System.out.println(newDirectory);
-                Files.move(oldDirectory, newDirectory);
-                counter--;
-            }
-            else{
-                counter--;
-            }
-        }
-
-
-        for(int i = 0; i < directoriesDownloads.toArray().length; i++){
-            System.out.println(directoriesDownloads.get(i));
-        }
+        currentFile = 0;
+        processNextFile();
 
     }
 
     @FXML
     public void OrganizeDocuments(ActionEvent event) throws Exception{
-        File downloads = new File("/Users/" + OSName + "/Documents");
+        File downloads = Paths.get(System.getProperty("user.home"), "Documents").toFile();
 
-        File[] contentDownloads = downloads.listFiles();
+        contentDownloads = Arrays.stream(downloads.listFiles())
+                .filter(File::isFile)
+                .toList();
 
-        int counter = contentDownloads.length;
-        List<String> directoriesDownloads = new ArrayList<>();
-
-        for (int i = 0; i < contentDownloads.length; i++) {
-            if (contentDownloads[i].isFile()) {
-                oldDirectory = Path.of(contentDownloads[i].getAbsolutePath());
-
-                DirectoryChooser dirChooser = new DirectoryChooser();
-                dirChooser.setTitle("Choose a folder");
-                Stage stage = new Stage();
-                File downloads3 = dirChooser.showDialog(stage);
-
-                folder = ModelService.call(findDirectoriesDownloads(downloads3), contentDownloads[i]);
-                newDirectory = Path.of(folder, contentDownloads[i].getName());
-
-                System.out.println(contentDownloads[i] + " is going to: " + folder);
-                System.out.println("old is: " + oldDirectory);
-                System.out.println(newDirectory);
-                Files.move(oldDirectory, newDirectory);
-                counter--;
-            }
-            else{
-                counter--;
-            }
-        }
-
-
-        for(int i = 0; i < directoriesDownloads.toArray().length; i++){
-            System.out.println(directoriesDownloads.get(i));
-        }
+        currentFile = 0;
+        processNextFile();
     }
 
     @FXML
     public void OrganizeDownloads(ActionEvent event) throws Exception{
-        File downloads = new File("/Users/" + OSName + "/Downloads");
+        File downloads = Paths.get(System.getProperty("user.home"), "Downloads").toFile();
 
-        File[] contentDownloads = downloads.listFiles();
+        contentDownloads = Arrays.stream(downloads.listFiles())
+                .filter(File::isFile)
+                .toList();
 
-        int counter = contentDownloads.length;
-        List<String> directoriesDownloads = new ArrayList<>();
-
-        for (int i = 0; i < contentDownloads.length; i++) {
-            if (contentDownloads[i].isFile()) {
-                oldDirectory = Path.of(contentDownloads[i].getAbsolutePath());
-
-                DirectoryChooser dirChooser = new DirectoryChooser();
-                dirChooser.setTitle("Choose a folder");
-                Stage stage = new Stage();
-                File downloads4 = dirChooser.showDialog(stage);
-
-                folder = ModelService.call(findDirectoriesDownloads(downloads4), contentDownloads[i]);
-                newDirectory = Path.of(folder, contentDownloads[i].getName());
-
-                System.out.println(contentDownloads[i] + " is going to: " + folder);
-                System.out.println("old is: " + oldDirectory);
-                System.out.println(newDirectory);
-                Files.move(oldDirectory, newDirectory);
-                counter--;
-            }
-            else{
-                counter--;
-            }
-        }
-
-
-        for(int i = 0; i < directoriesDownloads.toArray().length; i++){
-            System.out.println(directoriesDownloads.get(i));
-        }
+        currentFile = 0;
+        processNextFile();
     }
 
     @FXML
@@ -1021,38 +864,14 @@ public class MainController{
         File selectedFolder = folderChooser.showDialog(stage);
         System.out.println("Selected folder is: " + selectedFolder.toString());
 
-        File[] contentDownloads = selectedFolder.listFiles();
+        File downloads = Paths.get(System.getProperty("user.home"), selectedFolder.getName()).toFile();
 
-        int counter = contentDownloads.length;
-        List<String> directoriesDownloads = new ArrayList<>();
+        contentDownloads = Arrays.stream(downloads.listFiles())
+                .filter(File::isFile)
+                .toList();
 
-        for (int i = 0; i < contentDownloads.length; i++) {
-            if (contentDownloads[i].isFile()) {
-                oldDirectory = Path.of(contentDownloads[i].getAbsolutePath());
-
-                DirectoryChooser dirChooser = new DirectoryChooser();
-                dirChooser.setTitle("Choose a folder");
-                Stage stage5 = new Stage();
-                File downloads5 = dirChooser.showDialog(stage5);
-
-                folder = ModelService.call(findDirectoriesDownloads(downloads5), contentDownloads[i]);
-                newDirectory = Path.of(folder, contentDownloads[i].getName());
-
-                System.out.println(contentDownloads[i] + " is going to: " + folder);
-                System.out.println("old is: " + oldDirectory);
-                System.out.println(newDirectory);
-                Files.move(oldDirectory, newDirectory);
-                counter--;
-            }
-            else{
-                counter--;
-            }
-        }
-
-
-        for(int i = 0; i < directoriesDownloads.toArray().length; i++){
-            System.out.println(directoriesDownloads.get(i));
-        }
+        currentFile = 0;
+        processNextFile();
     }
 
     public void SortFolder(File selectedFolder) throws Exception{
@@ -1084,6 +903,16 @@ public class MainController{
     }
 
     @FXML
+    public void OpenReadme(ActionEvent event) throws Exception{
+        Desktop.getDesktop().browse(new URI("https://github.com/notsorand0m/AFFCM/blob/main/README.md"));
+    }
+
+    @FXML
+    public void OpenGitHub(ActionEvent event) throws Exception{
+        Desktop.getDesktop().browse(new URI("https://github.com/notsorand0m/AFFCM"));
+    }
+
+    @FXML
     public void ChooseAIModel(ActionEvent event) throws Exception{
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose a file");
@@ -1102,7 +931,7 @@ public class MainController{
 
     @FXML
     public void DefaultAIModel(ActionEvent event) throws Exception{
-        UserService.setAIModel("Mistral-Nemo-Instruct-2407-Q4_K_S.gguf");
+        UserService.setAIModel("Mistral-Nemo-Instruct-2407-Q4_K_S.gguf"); // FIX
         UserService.setData1log("Changed AI Model to default | " + LocalDateTime.now());
         JSONControl.json_saver(UserService.getData1());
     }
@@ -1143,29 +972,39 @@ public class MainController{
     @FXML
     public void UpdateHistory(ActionEvent event) throws Exception{
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/affcm/fxml/History.fxml"));
-        try {
-            Parent window = loader.load();
-
-            // Creates new instance of the controller
-            MainController controller = loader.getController();
-            // controller.historyText.setText(UserService.getData1().log);
-
-            // Shows the windows with the new instance of MainController :)
-            rootPane.getChildren().setAll(window);
-
-
-
-        } catch (Exception ignored) {
-
-        }
+//        FXMLLoader loader;
+//
+//        if(UserService.getData1().theme.equals("Light")){
+//            loader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/HistoryLite.fxml")));
+//        }
+//        else if(UserService.getData1().theme.equals("Dark")){
+//            loader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/History.fxml")));
+//        }
+//        else{
+//            loader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/History.fxml")));
+//        }
+//        try {
+//            Parent window = loader.load();
+//
+//            // Creates new instance of the controller
+//            MainController controller = loader.getController();
+//            // controller.historyText.setText(UserService.getData1().log);
+//
+//            // Shows the windows with the new instance of MainController :)
+//            rootPane.getChildren().setAll(window);
+//
+//
+//
+//        } catch (Exception ignored) {
+//
+//        }
     }
 
     @FXML
     public void ScanFolders(ActionEvent event) throws Exception {
 
         // Scans Downloads Folder
-        File downloads = new File("/Users/" + OSName + "/Downloads");
+        File downloads = Paths.get(System.getProperty("user.home"), "Downloads").toFile();
 
         File[] contentDownloads = downloads.listFiles();
 
@@ -1204,20 +1043,21 @@ public class MainController{
             }
         };
 
-        if (multithreadingState.equals("On")) {
-            while (counter > 0) {
-                service.submit(task);
-                counter--;
-            }
-        } else {
-
+        multithreadingState = UserService.getData1().multithreading;
+        if(multithreadingState.equals("On")){
+            service.submit(task);
+        }
+        else{
+            ExecutorService service1 = Executors.newFixedThreadPool(2);
+            service1.submit(task);
         }
 
         System.out.println();
-
+        /// //
+        /// //
+        /// //
         // Scanning Documents Folder
-        File documents = new File("/Users/" + OSName + "/Documents");
-
+        File documents = Paths.get(System.getProperty("user.home"), "Documents").toFile();
         File[] contentDocuments = documents.listFiles();
 
         int counter2 = contentDocuments.length;
@@ -1231,23 +1071,15 @@ public class MainController{
             }
         };
 
-        if (multithreadingState.equals("On")) {
-            while (counter2 > 0) {
-                service.submit(task2);
-                counter2--;
-            }
-        } else {
-            while (counter2 > 0) {
-                for (int i = 0; i < contentDocuments.length; i++) {
-                    if (contentDocuments[i].isDirectory()) {
-                        directoriesDocuments.add(contentDocuments[i].toString());
-                    } else if (contentDocuments[i].isFile()) {
-                        System.out.println("Found not sorted file: " + contentDocuments[i]);
-                    }
-                    counter2--;
-                }
-            }
+        multithreadingState = UserService.getData1().multithreading;
+        if(multithreadingState.equals("On")){
+            service.submit(task2);
         }
+        else{
+            ExecutorService service1 = Executors.newFixedThreadPool(2);
+            service1.submit(task2);
+        }
+        /// ///
 
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("folders.txt"))){
             for(int i = 0; i < contentDownloads.length; i++){
@@ -1292,35 +1124,57 @@ public class MainController{
         File selectedFolder = folderChooser.showDialog(stage);
         System.out.println(selectedFolder);
 
-        File[] contentDownloads = selectedFolder.listFiles();
+        File[] content = selectedFolder.listFiles();
 
-        int counter = contentDownloads.length;
-        List<String> directoriesDownloads = new ArrayList<>();
+        int counter = content.length;
 
-        Task<Void> task = new Task<Void>() {
+        Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
-                for (int i = 0; i < contentDownloads.length; i++) {
-                    if (contentDownloads[i].isDirectory()) {
-                        directoriesDownloads.add(contentDownloads[i].toString());
-                    } else if (contentDownloads[i].isFile()) {
-                        System.out.println("Found not sorted file: " + contentDownloads[i]);
-                        final File ii = contentDownloads[i];
-                        Task<Void> tempTask = new Task<Void>() {
-
+                for (int i = 0; i < content.length; i++) {
+                    if (content[i].isFile()) {
+                        System.out.println("Found not sorted file: " + content[i]);
+                        final File ii = content[i];
+                        Task<Void> tempTask = new Task<>() {
                             @Override
                             protected Void call() throws Exception {
                                 try {
-                                    ModelService.call(directoriesDownloads, ii);
+                                    ModelService.call(findDirectories(new File(selectedFolder.getParent())), ii);
                                 } catch (Exception e) {
                                     throw new RuntimeException(e);
                                 }
                                 return null;
                             }
                         };
-                        if(tempTask.isDone()){
-                            tempTask.run();
-                        }
+
+                        tempTask.setOnSucceeded(e -> {
+                            FXMLLoader loader;
+                            if (UserService.getData1().org_level.equals("Passive")) {
+                                // Loads .fxml file
+                                if (UserService.getData1().theme.equals("Dark")) {
+                                    loader = new FXMLLoader(getClass().getResource("/com/affcm/fxml/Uploaded.fxml"));
+                                } else if (UserService.getData1().theme.equals("Light")) {
+                                    loader = new FXMLLoader(getClass().getResource("/com/affcm/fxml/UploadedLite.fxml"));
+                                } else {
+                                    loader = new FXMLLoader(getClass().getResource("/com/affcm/fxml/Uploaded.fxml"));
+                                }
+
+                                try {
+                                    Parent window = loader.load();
+
+                                    // Creates new instance of the controller
+                                    MainController controller = loader.getController();
+                                    controller.recommended_folder.setText("Recommended location for: " + ii + " is:" + folder);
+
+                                    // Shows the windows with the new instance of MainController :)
+                                    rootPane.getChildren().setAll(window);
+
+
+                                } catch (Exception exception) {
+                                    throw new RuntimeException(exception);
+                                }
+                            }
+                        });
 
                     }
                 }
@@ -1338,8 +1192,8 @@ public class MainController{
         }
 
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("folders.txt"))){
-            for(int i = 0; i < contentDownloads.length; i++){
-                writer.write(String.valueOf(contentDownloads[i]));
+            for(int i = 0; i < content.length; i++){
+                writer.write(String.valueOf(content[i]));
                 writer.newLine();
             }
 
@@ -1357,8 +1211,9 @@ public class MainController{
                 service.submit(task3);
             }
             else {
-                desktop.open(file);
+                service.submit(task3);
             }
+            desktop.open(file);
 
         }
         catch(Exception ignored){
@@ -1368,14 +1223,34 @@ public class MainController{
 
     @FXML
     public void OpenAIModelPage(ActionEvent event) throws Exception{
-        Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseModel.fxml")));
-        rootPane.getChildren().setAll(fxmlLoader);
+        if(UserService.getData1().theme.equals("Light")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseModelLite.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else if(UserService.getData1().theme.equals("Dark")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseModel.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else{
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseModel.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
     }
 
     @FXML
     public void OpenPluginPage(ActionEvent event) throws Exception{
-        Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Plugin.fxml")));
-        rootPane.getChildren().setAll(fxmlLoader);
+        if(UserService.getData1().theme.equals("Light")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/PluginLite.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else if(UserService.getData1().theme.equals("Dark")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Plugin.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else{
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Plugin.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
     }
 
     @FXML
@@ -1429,8 +1304,18 @@ public class MainController{
 
     @FXML
     public void OpenAIOrganizePage(ActionEvent event) throws Exception{
-        Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/AI_Organize.fxml")));
-        rootPane.getChildren().setAll(fxmlLoader);
+        if(UserService.getData1().theme.equals("Light")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/AI_OrganizeLite.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else if(UserService.getData1().theme.equals("Dark")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/AI_Organize.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else{
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/AI_Organize.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
     }
 
     @FXML
@@ -1468,8 +1353,18 @@ public class MainController{
 
     @FXML
     public void OpenPerformanceModePage(ActionEvent evnet) throws Exception{
-        Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/PerformanceMode.fxml")));
-        rootPane.getChildren().setAll(fxmlLoader);
+        if(UserService.getData1().theme.equals("Light")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/PerformanceModeLite.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else if(UserService.getData1().theme.equals("Dark")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/PerformanceMode.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else{
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/PerformanceMode.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
     }
 
     @FXML
@@ -1480,14 +1375,34 @@ public class MainController{
 
     @FXML
     public void OpenHistory(ActionEvent event) throws Exception{
-        Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/History.fxml")));
-        rootPane.getChildren().setAll(fxmlLoader);
+        if(UserService.getData1().theme.equals("Light")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/HistoryLite.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else if(UserService.getData1().theme.equals("Dark")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/History.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else{
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/History.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
     }
 
     @FXML
     public void OpenCloudSync(ActionEvent event) throws Exception{
-        Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/CloudSync.fxml")));
-        rootPane.getChildren().setAll(fxmlLoader);
+        if(UserService.getData1().theme.equals("Light")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/CloudSyncLite.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else if(UserService.getData1().theme.equals("Dark")){
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/CloudSync.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
+        else{
+            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/CloudSync.fxml")));
+            rootPane.getChildren().setAll(fxmlLoader);
+        }
     }
 
     @FXML
@@ -1496,10 +1411,6 @@ public class MainController{
         rootPane.getChildren().setAll(fxmlLoader);
     }
 
-    @FXML
-    public void OpenViewUploaded() throws Exception{
-
-    }
 
     @FXML
     public void OpenUploaded() throws Exception{
