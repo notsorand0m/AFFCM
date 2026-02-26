@@ -3,7 +3,10 @@
 
 ### AI file path recommendation for specific used selected file
 ### Customizable AI model for more versatility
+### AES Encryption/Decryption
 ### Basic database .json system included 
+### Light/Dark Themes
+
 
 **Used libraries:**
   - javafx
@@ -12,7 +15,7 @@
   - slf4j-api-1.7.36
 
 MacOS Support
-[Download .dmg file](https://www.dropbox.com/scl/fi/ybfmvha0rbbbxjp3rtfvi/AFFCM-1.0.dmg?rlkey=ut7fu7hggapx7lmsaq42a3vs6&st=cpz6x8r2&dl=0)
+[Download .dmg file](https://www.dropbox.com/scl/fi/4tb16twkwv4ufvq5nbc1i/AFFCM-1.0.dmg?rlkey=avgpielym2ll268nljl6cqmrm&st=2jdn3tpj&dl=0)
 
 Windows Support (To be developed)
 
