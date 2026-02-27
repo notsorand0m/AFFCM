@@ -32,12 +32,28 @@ public class Main extends Application{
     }
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/affcm/fxml/Main.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
+        try {
+            // 1. Check if the FXML file actually exists before loading
+            java.net.URL fxmlLocation = getClass().getResource("/com/affcm/fxml/Main.fxml");
+            if (fxmlLocation == null) {
+                throw new Exception("CRITICAL: FXML file not found! Check your build path.");
+            }
 
-        stage.setScene(scene);
-        stage.show();
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (Exception e) {
+            // This will catch the error and print it so you can see it in logs
+            e.printStackTrace();
+
+            // Bonus: Show a popup so you know WHY it's not starting
+            javax.swing.JOptionPane.showMessageDialog(null, "Error Launching: " + e.getMessage());
+            System.exit(1);
+        }
     }
 
 }

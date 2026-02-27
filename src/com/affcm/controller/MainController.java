@@ -349,20 +349,27 @@ public class MainController{
             @Override
             protected String call() throws Exception {
                 // .call(directories, file)
-                folder = ModelService.call(findDirectories(contentDownloads.get(currentFile).getParentFile()), contentDownloads.get(currentFile));
-                oldDirectory = contentDownloads.get(currentFile).toPath().toAbsolutePath();
-                newDirectory = Path.of(folder + contentDownloads.get(currentFile).getName());
+                if(!UserService.getData1().AIModel.isEmpty()) {
+                    folder = ModelService.call(findDirectories(contentDownloads.get(currentFile).getParentFile()), contentDownloads.get(currentFile));
+                    oldDirectory = contentDownloads.get(currentFile).toPath().toAbsolutePath();
+                    newDirectory = Path.of(folder + contentDownloads.get(currentFile).getName());
+                }
+                else{
+                    OpenChooseModelPage(new ActionEvent());
+                }
                 return folder;
             }
         };
 
         task.setOnSucceeded(event -> {
             try {
+
                 String fxml = UserService.getData1().theme.equals("Light") ?
-                        "/com/affcm/fxml/UploadedLite.fxml" : "/com/affcm/fxml/UploadedCycle.fxml";
+                        "/com/affcm/fxml/UploadedCycleLite.fxml" : "/com/affcm/fxml/UploadedCycle.fxml";
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
                 Parent layout = loader.load();
+
                 MainController controller = loader.getController();
 
                 controller.recommended_folder.setText("Recommended folder: " + folder + "/" + contentDownloads.get(currentFile).getName());
@@ -399,35 +406,13 @@ public class MainController{
 
         }
 
-        if(UserService.getData1().theme.equals("Light")){
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/MainLite.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
-        else if(UserService.getData1().theme.equals("Dark")){
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
-        else{
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
+        OpenHomePage(new ActionEvent());
     }
 
 
     @FXML
     public void setRecommendedFolderDeclined(ActionEvent event) throws Exception{
-        if(UserService.getData1().theme.equals("Light")){
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/MainLite.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
-        else if(UserService.getData1().theme.equals("Dark")){
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
-        else{
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
+        OpenHomePage(new ActionEvent());
 
     }
 
@@ -485,11 +470,17 @@ public class MainController{
                     }
                     else{
                         if(UserService.getData1().theme.equals("Light")){
-                            OpenChooseModelPage(new ActionEvent());
+                            OpenChooseModelPage(new ActionEvent()); // Or pass the event if needed
                             // Fix some day to be redirect again to modelservice.call
                         }
                         else if(UserService.getData1().theme.equals("Dark")){
-                            OpenChooseModelPage(new ActionEvent());
+                            javafx.application.Platform.runLater(() -> {
+                                try {
+                                    OpenChooseModelPage(new ActionEvent()); // Or pass the event if needed
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            });
                         }
                         else{
                             OpenChooseModelPage(new ActionEvent());
@@ -502,39 +493,44 @@ public class MainController{
         };
 
         task1.setOnFailed(e -> {
-            throw new RuntimeException();
+            Throwable err = task1.getException();
+            err.printStackTrace();
         });
 
         task1.setOnSucceeded((evnt) -> {
 
-            FXMLLoader loader;
+            String path;
             if(UserService.getData1().org_level.equals("Passive")) {
                 // Loads .fxml file
                 if(UserService.getData1().theme.equals("Dark")){
-                    loader = new FXMLLoader(getClass().getResource("/com/affcm/fxml/Uploaded.fxml"));
+                    path = "/com/affcm/fxml/Uploaded.fxml";
                 }
                 else if(UserService.getData1().theme.equals("Light")){
-                    loader = new FXMLLoader(getClass().getResource("/com/affcm/fxml/UploadedLite.fxml"));
+                    path = "/com/affcm/fxml/UploadedLite.fxml";
                 }
                 else{
-                    loader = new FXMLLoader(getClass().getResource("/com/affcm/fxml/Uploaded.fxml"));
+                    path = "/com/affcm/fxml/Uploaded.fxml";
                 }
 
-                try {
-                    Parent window = loader.load();
+                final String finalPath = path;
 
-                    // Creates new instance of the controller
-                    MainController controller = loader.getController();
-                    controller.recommended_folder.setText("Recommended location: " + folder + "/" + file.getName());
+                javafx.application.Platform.runLater(() -> {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource(finalPath));
+                        Parent window = loader.load();
 
-                    // Shows the windows with the new instance of MainController :)
-                    rootPane.getChildren().setAll(window);
+                        // 3. Set up the controller (Must be on UI thread because it touches a Label)
+                        MainController controller = loader.getController();
+                        controller.recommended_folder.setText("Recommended location: " + folder + "/" + file.getName());
 
+                        // 4. Update the pane
+                        rootPane.getChildren().setAll(window);
 
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
 
-                } catch (Exception exception) {
-                    throw new RuntimeException(exception);
-                }
             }
             else if(UserService.getData1().org_level.equals("Autonomous")){
                 try {
@@ -931,9 +927,9 @@ public class MainController{
 
     @FXML
     public void DefaultAIModel(ActionEvent event) throws Exception{
-        UserService.setAIModel("Mistral-Nemo-Instruct-2407-Q4_K_S.gguf"); // FIX
-        UserService.setData1log("Changed AI Model to default | " + LocalDateTime.now());
-        JSONControl.json_saver(UserService.getData1());
+//        UserService.setAIModel("Mistral-Nemo-Instruct-2407-Q4_K_S.gguf"); // FIX
+//        UserService.setData1log("Changed AI Model to default | " + LocalDateTime.now());
+//        JSONControl.json_saver(UserService.getData1());
     }
 
     @FXML
@@ -1255,51 +1251,72 @@ public class MainController{
 
     @FXML
     public void OpenSettingsPage(ActionEvent event) throws Exception{
-        if(UserService.getData1().theme.equals("Light")){
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/SettingsLite.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
-        else if(UserService.getData1().theme.equals("Dark")){
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Settings.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
-        else{
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Settings.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
+        javafx.application.Platform.runLater(() -> {
+            try {
+                if(UserService.getData1().theme.equals("Light")){
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/SettingsLite.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+                else if(UserService.getData1().theme.equals("Dark")){
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Settings.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+                else{
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Settings.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+
+            } catch (Exception ignored) {
+
+            }
+        });
 
     }
 
     @FXML
     public void OpenOrgLevelNotSet(ActionEvent event) throws Exception{
-        if(UserService.getData1().theme.equals("Light")){
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/OrganizationLevelNotSetLite.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
-        else if(UserService.getData1().theme.equals("Dark")){
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/OrganizationLevelNotSet.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
-        else{
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/OrganizationLevelNotSet.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
+        javafx.application.Platform.runLater(() -> {
+            try {
+                if(UserService.getData1().theme.equals("Light")){
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/OrganizationLevelNotSetLite.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+                else if(UserService.getData1().theme.equals("Dark")){
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/OrganizationLevelNotSet.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+                else{
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/OrganizationLevelNotSet.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+
+            } catch (Exception ignored) {
+
+            }
+        });
     }
 
     @FXML
     public void OpenChooseModelPage(ActionEvent event) throws Exception{
-        if(UserService.getData1().theme.equals("Light")) {
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseModelLite.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
-        else if(UserService.getData1().theme.equals("Dark")) {
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseModel.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
-        else {
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseModel.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
+        javafx.application.Platform.runLater(() -> {
+            try {
+                if(UserService.getData1().theme.equals("Light")){
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseModelLite.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+                else if(UserService.getData1().theme.equals("Dark")){
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseModel.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+                else{
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/ChooseModel.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+
+            } catch (Exception ignored) {
+
+            }
+        });
     }
 
     @FXML
@@ -1320,35 +1337,72 @@ public class MainController{
 
     @FXML
     public void OpenHomePage(ActionEvent event) throws Exception{
-        if(UserService.getData1().theme.equals("Light")){
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/MainLite.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
-        else if(UserService.getData1().theme.equals("Dark")){
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
-        else{
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
+        javafx.application.Platform.runLater(() -> {
+            try {
+                if(UserService.getData1().theme.equals("Light")){
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/MainLite.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+                else if(UserService.getData1().theme.equals("Dark")){
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+                else{
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Main.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+
+            } catch (Exception ignored) {
+
+            }
+        });
+
+    }
+
+    public void OpenUploadedCycle(ActionEvent event) throws Exception{
+        javafx.application.Platform.runLater(() -> {
+            try {
+                if(UserService.getData1().theme.equals("Light")){
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/UploadedCycleLite.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+                else if(UserService.getData1().theme.equals("Dark")){
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/UploadedCycle.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+                else{
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/UploadedCycle.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+
+            } catch (Exception ignored) {
+
+            }
+        });
 
     }
 
     @FXML
     public void OpenEncryptDecryptPage(ActionEvent event) throws Exception{
-        if(UserService.getData1().theme.equals("Light")){
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/EncryptDecryptLite.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
-        else if(UserService.getData1().theme.equals("Dark")){
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/EncryptDecrypt.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
-        else{
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/EncryptDecrypt.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
+        javafx.application.Platform.runLater(() -> {
+            try {
+                if(UserService.getData1().theme.equals("Light")){
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/EncryptDecryptLite.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+                else if(UserService.getData1().theme.equals("Dark")){
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/EncryptDecrypt.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+                else{
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/EncryptDecrypt.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+
+            } catch (Exception ignored) {
+
+            }
+        });
     }
 
     @FXML
@@ -1414,18 +1468,25 @@ public class MainController{
 
     @FXML
     public void OpenUploaded() throws Exception{
-        if(UserService.getData1().theme.equals("Light")){
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/UploadedLite.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
-        else if(UserService.getData1().theme.equals("Dark")){
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Uploaded.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
-        else{
-            Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Uploaded.fxml")));
-            rootPane.getChildren().setAll(fxmlLoader);
-        }
+        javafx.application.Platform.runLater(() -> {
+            try {
+                if(UserService.getData1().theme.equals("Light")){
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/UploadedLite.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+                else if(UserService.getData1().theme.equals("Dark")){
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Uploaded.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+                else{
+                    Parent fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/affcm/fxml/Uploaded.fxml")));
+                    rootPane.getChildren().setAll(fxmlLoader);
+                }
+
+            } catch (Exception ignored) {
+
+            }
+        });
 
     }
 

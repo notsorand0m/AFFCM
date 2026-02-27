@@ -14,6 +14,7 @@ module AFFCM {
     exports com.affcm.controller;
     exports com.affcm.service;
 
+    opens com.affcm.service to com.google.gson, javafx.fxml;
     opens com.affcm to javafx.fxml;
     opens com.affcm.controller to javafx.fxml;
 }

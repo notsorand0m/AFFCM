@@ -64,7 +64,7 @@
                         <Font name="Arial" size="12.0" />
                     </font>
                 </Text>
-                <Text fx:id="freeSpace" fill="#b5aeae" layoutX="1038.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000 GB" wrappingWidth="95.35250854492188">
+                <Text fx:id="freeSpace" fill="#b5aeae" layoutX="1028.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000 GB" wrappingWidth="95.35250854492188">
                     <font>
                         <Font name="Arial" size="12.0" />
                     </font>
@@ -140,12 +140,12 @@
                   <URL value="@styleBTNLite.css" />
                </stylesheets>
                 </Button>
-                <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#6f6c6c" height="513.0" layoutX="248.0" layoutY="120.0" stroke="#6f6c6c" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.05" width="608.0">
+                <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#6f6c6c" height="513.0" layoutX="248.0" layoutY="120.0" stroke="#757272" strokeLineJoin="BEVEL" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.05" width="608.0">
                     <effect>
                         <Blend />
                     </effect>
                 </Rectangle>
-                <Text fx:id="totalSpace" fill="#b5aeae" layoutX="1038.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000 GB" wrappingWidth="95.35250854492188">
+                <Text fx:id="totalSpace" fill="#b5aeae" layoutX="1028.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000 GB" wrappingWidth="95.35250854492188">
                     <font>
                         <Font name="Arial" size="12.0" />
                     </font>
@@ -164,7 +164,7 @@
                   <URL value="@styleLite.css" />
                </stylesheets>
                 </Button>
-            <Button fx:id="RecommendedFolderAccepted" alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="306.0" layoutY="258.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#btnAccepted" prefHeight="36.0" prefWidth="66.0" text="Accept" textFill="#b5aeae">
+            <Button fx:id="RecommendedFolderAccepted" alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="306.0" layoutY="258.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#setRecommendedFolderAccepted" prefHeight="36.0" prefWidth="66.0" text="Accept" textFill="#b5aeae">
                <font>
                   <Font size="15.0" />
                </font>
@@ -182,7 +182,7 @@
                   <URL value="@styleBTNLite.css" />
                </stylesheets>
             </Button>
-            <Button fx:id="RecommendedFolderTryAgain" alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="681.0" layoutY="259.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#tryAgain" prefHeight="36.0" prefWidth="78.0" text="Try again" textFill="#b5aeae">
+            <Button fx:id="RecommendedFolderTryAgain" alignment="BOTTOM_LEFT" blendMode="SRC_ATOP" layoutX="681.0" layoutY="259.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#UploadFile" prefHeight="36.0" prefWidth="78.0" text="Try again" textFill="#b5aeae">
                <font>
                   <Font size="15.0" />
                </font>
@@ -196,21 +196,6 @@
                   <Font name="Arial" size="18.0" />
                </font>
             </Button>
-            <ImageView fitHeight="120.0" fitWidth="121.0" layoutX="-30.0" layoutY="26.0" scaleX="0.1" scaleY="0.09">
-               <image>
-                  <Image url="@HomePageIcon.png" />
-               </image>
-            </ImageView>
-            <ImageView fitWidth="111.0" layoutX="-24.0" layoutY="98.0" scaleX="0.15" scaleY="0.2">
-               <image>
-                  <Image url="@EncryptionIcon.png" />
-               </image>
-            </ImageView>
-            <ImageView layoutX="-63.0" layoutY="86.0" scaleX="0.08" scaleY="0.1">
-               <image>
-                  <Image url="@Settings.png" />
-               </image>
-            </ImageView>
             </children>
         </Pane>
     </center>
