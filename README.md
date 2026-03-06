@@ -9,7 +9,7 @@
 --------------------------------------------
 
 MacOS Support
-[Download .dmg file](https://www.dropbox.com/scl/fi/4tb16twkwv4ufvq5nbc1i/AFFCM-1.0.dmg?rlkey=avgpielym2ll268nljl6cqmrm&st=2jdn3tpj&dl=0)
+[Download .dmg file](https://www.dropbox.com/scl/fi/wfuog4skircf9b6380z79/AFFCM-1.0.dmg?rlkey=gjcwxcb869jc8edmu4uzo0c1v&st=m228g518&dl=0)
 
 Windows Support
 [Downloads .exe file](https://www.dropbox.com/scl/fi/2aw5xrchtfofb5rt6mwb9/AFFCM.zip?rlkey=t8c990597hozxmrbafckn5847&st=3askx9zj&dl=0)
